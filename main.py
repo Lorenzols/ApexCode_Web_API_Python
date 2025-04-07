@@ -125,3 +125,40 @@ async def guardar_datos(datos: DatosGuardar):
     print("Descripcion:", descripcion)
 
     return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
+
+
+@app.get("/tareas")
+def get_tareas():
+    tareas = [
+        {
+            "id": 1,
+            "nombre": "Distribuir alimentos",
+            "prioridad": "Alta",
+            "categoria": "Comida",
+            "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+            "estado": "Pendiente",
+            "voluntarios": [],
+            "afectados": []
+        },
+        {
+            "id": 2,
+            "nombre": "Atención médica",
+            "prioridad": "Media",
+            "categoria": "Sanidad",
+            "descripcion": "Brindar primeros auxilios a los heridos.",
+            "estado": "En proceso",
+            "voluntarios": [],
+            "afectados": []
+        },
+        {
+            "id": 3,
+            "nombre": "Reconstrucción de viviendas",
+            "prioridad": "Alta",
+            "categoria": "Reconstrucción",
+            "descripcion": "Apoyo en la reconstrucción de viviendas dañadas.",
+            "estado": "Completada",
+            "voluntarios": [],
+            "afectados": []
+        }
+    ]
+    return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
