@@ -18,9 +18,8 @@ app.add_middleware(
 class Usuario(BaseModel):
     nombre: str
     apellidos: str
-    pais: str
-    provincia: str
-    municipio: str
+    telefono: str
+    correo: str
     direccion: str
     prioridad: str
     categoria: str
@@ -37,9 +36,8 @@ def get_usuarios_afectados():
             "foto_perfil": "https://randomuser.me/api/portraits/men/10.jpg",
             "nombre": "Carlos",
             "apellidos": "Martínez López",
-            "pais": "España",
-            "provincia": "Sevilla",
-            "municipio": "Dos Hermanas",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
             "direccion": "Calle Río Guadalquivir 14",
             "prioridad": "Alta",
             "categoria": "Reconstrucción",
@@ -49,9 +47,8 @@ def get_usuarios_afectados():
             "foto_perfil": "https://randomuser.me/api/portraits/women/45.jpg",
             "nombre": "Lucía",
             "apellidos": "Gómez Pérez",
-            "pais": "España",
-            "provincia": "Valencia",
-            "municipio": "Torrent",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
             "direccion": "Avenida del Sol 22",
             "prioridad": "Media",
             "categoria": "Limpieza",
@@ -61,9 +58,8 @@ def get_usuarios_afectados():
             "foto_perfil": "https://randomuser.me/api/portraits/men/32.jpg",
             "nombre": "Andrés",
             "apellidos": "Ruiz Sánchez",
-            "pais": "España",
-            "provincia": "Málaga",
-            "municipio": "Ronda",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
             "direccion": "Camino de la Sierra 5",
             "prioridad": "Baja",
             "categoria": "Solicitar recursos",
@@ -79,9 +75,8 @@ def get_usuarios_ayudantes():
             "foto_perfil": "https://randomuser.me/api/portraits/men/15.jpg",
             "nombre": "Javier",
             "apellidos": "García Hernández",
-            "pais": "España",
-            "provincia": "Madrid",
-            "municipio": "Madrid",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
             "direccion": "Calle Gran Vía 10",
             "prioridad": "Baja",
             "categoria": "Logística",
@@ -91,9 +86,8 @@ def get_usuarios_ayudantes():
             "foto_perfil": "https://randomuser.me/api/portraits/women/22.jpg",
             "nombre": "Ana",
             "apellidos": "Fernández López",
-            "pais": "España",
-            "provincia": "Barcelona",
-            "municipio": "Barcelona",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
             "direccion": "Avenida Diagonal 50",
             "prioridad": "Media",
             "categoria": "Sanidad",
@@ -103,9 +97,8 @@ def get_usuarios_ayudantes():
             "foto_perfil": "https://randomuser.me/api/portraits/men/27.jpg",
             "nombre": "David",
             "apellidos": "Martínez González",
-            "pais": "España",
-            "provincia": "Valencia",
-            "municipio": "Valencia",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
             "direccion": "Calle de la Paz 7",
             "prioridad": "Alta",
             "categoria": "Ingeniería",
