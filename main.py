@@ -262,7 +262,23 @@ def get_tareas():
                 "categoria": "Terremoto",
                 "descripcion": "Inspección de viviendas en riesgo estructural.",
                 "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
-                }]
+                }],
+            "necesidades": [
+                {
+                    "direccion": "Avenida de la Libertad 34, Madrid",
+                    "estado": "PENDIENTE",
+                    "fecha": "2025-04-10",
+                    "urgencia": "Media",
+                    "descripcion": "Reparación de tendido eléctrico en zona rural."
+                },
+                {
+                    "direccion": "Calle del Mar 14, Valencia",
+                    "estado": "CONFIRMADA",
+                    "fecha": "2025-04-04",
+                    "urgencia": "Baja",
+                    "descripcion": "Inspección de viviendas afectadas por inundaciones."
+                }
+            ]
         },
         {
             "id": 2,
@@ -294,6 +310,29 @@ def get_tareas():
                 "descripcion": "Gestión de suministros y transporte de materiales.",
                 "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
                 }
+            ],
+            "necesidades": [
+                {
+                    "direccion": "Avenida de la Constitución 25, Cádiz",
+                    "estado": "EN_ESTUDIO",
+                    "fecha": "2025-04-09",
+                    "urgencia": "Media",
+                    "descripcion": "Evaluación de daños en infraestructuras viales."
+                },
+                {
+                    "direccion": "Plaza del Sol 18, Córdoba",
+                    "estado": "CONFIRMADA",
+                    "fecha": "2025-04-06",
+                    "urgencia": "Alta",
+                    "descripcion": "Distribución de alimentos y agua a los afectados."
+                },
+                {
+                    "direccion": "Carrer de Balmes 45, Barcelona",
+                    "estado": "EN_ESTUDIO",
+                    "fecha": "2025-04-08",
+                    "urgencia": "Alta",
+                    "descripcion": "Atención a personas con discapacidad en albergues temporales."
+                },
             ]
         },
         {
@@ -314,7 +353,30 @@ def get_tareas():
                 "descripcion": "Gestión de suministros y transporte de materiales.",
                 "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
                 }],
-            "usuarios_asignados": []
+            "usuarios_asignados": [],
+            "necesidades": [
+                {
+                    "direccion": "Avenida de la Constitución 25, Cádiz",
+                    "estado": "EN_ESTUDIO",
+                    "fecha": "2025-04-09",
+                    "urgencia": "Media",
+                    "descripcion": "Evaluación de daños en infraestructuras viales."
+                },
+                {
+                    "direccion": "Plaza del Sol 18, Córdoba",
+                    "estado": "CONFIRMADA",
+                    "fecha": "2025-04-06",
+                    "urgencia": "Alta",
+                    "descripcion": "Distribución de alimentos y agua a los afectados."
+                },
+                {
+                    "direccion": "Carrer de Balmes 45, Barcelona",
+                    "estado": "EN_ESTUDIO",
+                    "fecha": "2025-04-08",
+                    "urgencia": "Alta",
+                    "descripcion": "Atención a personas con discapacidad en albergues temporales."
+                },
+            ]
         }
     ]
     return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
