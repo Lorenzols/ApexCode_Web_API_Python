@@ -90,7 +90,20 @@ def get_usuarios_ayudantes():
             "direccion": "Calle Gran Vía 10",
             "prioridad": "Baja",
             "categoria": "Logística",
-            "descripcion": "Encargado de la distribución de materiales y recursos a las zonas afectadas."
+            "descripcion": "Encargado de la distribución de materiales y recursos a las zonas afectadas.",
+            "id":1
+        },
+        {
+            "foto_perfil": "https://randomuser.me/api/portraits/men/15.jpg",
+            "nombre": "Kaladin",
+            "apellidos": "García Hernández",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
+            "direccion": "Calle Gran Vía 10",
+            "prioridad": "Baja",
+            "categoria": "Logística",
+            "descripcion": "Encargado de la distribución de materiales y recursos a las zonas afectadas.",
+            "id":2
         },
         {
             "foto_perfil": "https://randomuser.me/api/portraits/women/22.jpg",
@@ -101,7 +114,8 @@ def get_usuarios_ayudantes():
             "direccion": "Avenida Diagonal 50",
             "prioridad": "Media",
             "categoria": "Sanidad",
-            "descripcion": "Médica especializada en urgencias y atención a heridos."
+            "descripcion": "Médica especializada en urgencias y atención a heridos.",
+            "id":3
         },
         {
             "foto_perfil": "https://randomuser.me/api/portraits/men/27.jpg",
@@ -112,10 +126,69 @@ def get_usuarios_ayudantes():
             "direccion": "Calle de la Paz 7",
             "prioridad": "Alta",
             "categoria": "Ingeniería",
-            "descripcion": "Ingeniero civil encargado de la evaluación de daños estructurales."
+            "descripcion": "Ingeniero civil encargado de la evaluación de daños estructurales.",
+            "id":4
         }
     ]
     return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
+
+@app.get("/usuariosAyudantes/{id}")
+def get_usuario_ayudante_por_id(id: int):
+    ayudantes = [
+        {
+            "id":1,
+            "foto_perfil": "https://randomuser.me/api/portraits/men/15.jpg",
+            "nombre": "Javier",
+            "apellidos": "García Hernández",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
+            "direccion": "Calle Gran Vía 10",
+            "prioridad": "Baja",
+            "categoria": "Logística",
+            "descripcion": "Encargado de la distribución de materiales y recursos a las zonas afectadas.",
+
+        },
+        {
+            "id":2,
+            "foto_perfil": "https://randomuser.me/api/portraits/men/15.jpg",
+            "nombre": "Kaladin",
+            "apellidos": "García Hernández",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
+            "direccion": "Calle Gran Vía 10",
+            "prioridad": "Baja",
+            "categoria": "Logística",
+            "descripcion": "Encargado de la distribución de materiales y recursos a las zonas afectadas.",
+        },
+        {
+            "id":3,
+            "foto_perfil": "https://randomuser.me/api/portraits/women/22.jpg",
+            "nombre": "Ana",
+            "apellidos": "Fernández López",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
+            "direccion": "Avenida Diagonal 50",
+            "prioridad": "Media",
+            "categoria": "Sanidad",
+            "descripcion": "Médica especializada en urgencias y atención a heridos.",
+        },
+        {
+            "id":4,
+            "foto_perfil": "https://randomuser.me/api/portraits/men/27.jpg",
+            "nombre": "David",
+            "apellidos": "Martínez González",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
+            "direccion": "Calle de la Paz 7",
+            "prioridad": "Alta",
+            "categoria": "Ingeniería",
+            "descripcion": "Ingeniero civil encargado de la evaluación de daños estructurales.",
+        }
+    ]
+    return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
+
+    
+    
 
 @app.post("/guardarDatos")
 async def guardar_datos(datos: DatosGuardar):
@@ -144,8 +217,52 @@ def get_tareas():
             "categoria": "Comida",
             "descripcion": "Repartir alimentos a los afectados en la zona sur.",
             "estado": "Pendiente",
-            "voluntarios": [],
-            "afectados": []
+            "usuarios_voluntarios": [
+                {
+                    "nombre": "Paquito",
+                    "apellidos": "Chocolatero",
+                    "telefono": "123456789",
+                    "correo": "Paquito@gmail.com",
+                    "direccion": "CalledePaco 62 8 4",
+                    "prioridad": "Alta",
+                    "categoria": "Comida",
+                    "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Paquito"
+                },
+                {
+                    "nombre": "Pepito",
+                    "apellidos": "Casta",
+                    "telefono": "234567890",
+                    "correo": "Pepito@gmail.com",
+                    "direccion": "CalledePaco 61 8 4",
+                    "prioridad": "Alta",
+                    "categoria": "Comida",
+                    "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Pepito"
+                }
+            ],
+            "usuarios_asignados": [{
+                "nombre": "Laura",
+                "apellidos": "Montenegro",
+                "telefono": "654987321",
+                "correo": "laura.monte@gmail.com",
+                "direccion": "Avenida del Sol 45, 3B",
+                "prioridad": "Media",
+                "categoria": "Inundación",
+                "descripcion": "Ayuda en la evacuación de familias afectadas.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Laura"
+                },
+                {
+                "nombre": "Carlos",
+                "apellidos": "Del Río",
+                "telefono": "789456123",
+                "correo": "carlos.delrio@example.com",
+                "direccion": "Calle Lluvia 12, Bajo A",
+                "prioridad": "Baja",
+                "categoria": "Terremoto",
+                "descripcion": "Inspección de viviendas en riesgo estructural.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
+                }]
         },
         {
             "id": 2,
@@ -154,8 +271,30 @@ def get_tareas():
             "categoria": "Sanidad",
             "descripcion": "Brindar primeros auxilios a los heridos.",
             "estado": "En proceso",
-            "voluntarios": [],
-            "afectados": []
+            "usuarios_voluntarios": [{
+                "nombre": "Susana",
+                "apellidos": "Valverde",
+                "telefono": "612345678",
+                "correo": "susana.valverde@mail.com",
+                "direccion": "Paseo de la Esperanza 21, 2ºD",
+                "prioridad": "Alta",
+                "categoria": "Rescate",
+                "descripcion": "Coordinación de equipos de búsqueda y rescate.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Susana"
+                },
+            ],
+            "usuarios_asignados": [{
+                "nombre": "Andrés",
+                "apellidos": "Giménez",
+                "telefono": "698745632",
+                "correo": "andresgimenez@yahoo.es",
+                "direccion": "Calle Roble 9, 1ºA",
+                "prioridad": "Media",
+                "categoria": "Logística",
+                "descripcion": "Gestión de suministros y transporte de materiales.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
+                }
+            ]
         },
         {
             "id": 3,
@@ -164,8 +303,35 @@ def get_tareas():
             "categoria": "Reconstrucción",
             "descripcion": "Apoyo en la reconstrucción de viviendas dañadas.",
             "estado": "Completada",
-            "voluntarios": [],
-            "afectados": []
+            "usuarios_voluntarios": [{
+                "nombre": "Carlos",
+                "apellidos": "Giménez",
+                "telefono": "698745632",
+                "correo": "Carlosgimenez@yahoo.es",
+                "direccion": "Calle Roble 10, 1ºA",
+                "prioridad": "Media",
+                "categoria": "Logística",
+                "descripcion": "Gestión de suministros y transporte de materiales.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
+                }],
+            "usuarios_asignados": []
+        }
+    ]
+    return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
+
+
+@app.get("/catastrofe")
+def get_tareas():
+    tareas = [
+        {
+            "id": 1,
+            "nombre": "Catastrofe 1",
+            "tipo": "Terremoto",
+            "magnitud": "Alta",
+            "descripcion": "Gotzilla",
+            "fechain": "Pendiente",
+            "fechaout": "01/04/2001",
+            "estado":"Activa"
         }
     ]    
     return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
