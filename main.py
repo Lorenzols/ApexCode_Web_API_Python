@@ -28,6 +28,9 @@ class Usuario(BaseModel):
 class DatosGuardar(BaseModel):
     afectados: List[Usuario]
     voluntarios: List[Usuario]
+    urgencia: str
+    categoria: str
+    descripcion: str
 
 @app.get("/usuariosAfectados")
 def get_usuarios_afectados():
@@ -184,9 +187,15 @@ def get_usuario_ayudante_por_id(id: int):
 async def guardar_datos(datos: DatosGuardar):
     afectados = datos.afectados
     voluntarios = datos.voluntarios
+    urgencia = datos.urgencia
+    categoria = datos.categoria
+    descripcion = datos.descripcion
 
     print("Afectados:", afectados)
     print("Voluntarios:", voluntarios)
+    print("Uregencia:", urgencia)
+    print("Categoria:", categoria)
+    print("Descripcion:", descripcion)
 
     return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
 
