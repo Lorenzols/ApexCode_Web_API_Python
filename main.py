@@ -25,8 +25,15 @@ class Usuario(BaseModel):
     categoria: str
     descripcion: str
 
+class Necesidad(BaseModel):
+    direccion: str
+    estado: str
+    fecha: str
+    urgencia: str
+    descripcion: str
+
 class DatosGuardar(BaseModel):
-    afectados: List[Usuario]
+    afectados: List[Necesidad]
     voluntarios: List[Usuario]
     urgencia: str
     categoria: str
@@ -326,5 +333,44 @@ def get_tareas():
             "fechaout": "01/04/2001",
             "estado":"Activa"
         }
-    ]
+    ]    
     return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
+
+
+@app.get("/necesidades")
+def get_necesidades():
+    necesidades = [
+        {
+            "direccion": "Calle Mayor 12, Sevilla",
+            "estado": "EN_ESTUDIO",
+            "fecha": "2025-04-10",
+            "urgencia": "Alta",
+            "descripcion": "Falta de suministros médicos en la zona.",
+            
+        },
+        {
+            "direccion": "Av. Andalucía 34, Córdoba",
+            "estado": "APROBADA",
+            "fecha": "2025-04-09",
+            "urgencia": "Media",
+            "descripcion": "Necesidad de limpieza de calles.",
+        
+        },
+        {
+            "direccion": "Calle Real 101, Cádiz",
+            "estado": "EN_VIVO",
+            "fecha": "2025-04-08",
+            "urgencia": "Alta",
+            "descripcion": "Entrega urgente de alimentos.",
+         
+        },
+        {
+            "direccion": "Camino del Monte 7, Málaga",
+            "estado": "CONFIRMADA",
+            "fecha": "2025-04-07",
+            "urgencia": "Baja",
+            "descripcion": "Revisión estructural de viviendas.",
+           
+        }
+    ]
+    return JSONResponse(content=necesidades, media_type="application/json; charset=utf-8")
