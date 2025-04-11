@@ -32,12 +32,21 @@ class Necesidad(BaseModel):
     urgencia: str
     descripcion: str
 
-class DatosGuardar(BaseModel):
+class DatosTarea(BaseModel):
     afectados: List[Necesidad]
     voluntarios: List[Usuario]
     urgencia: str
     categoria: str
     descripcion: str
+
+class DatosCatastrofe(BaseModel):
+    nombre: str
+    descripcion: str
+    TipoCatastrofe: str
+    Magnitud: int
+    Provincia: str
+    EstadoCatastrofe: str
+
 
 @app.get("/usuariosAfectados")
 def get_usuarios_afectados():
@@ -187,11 +196,28 @@ def get_usuario_ayudante_por_id(id: int):
     ]
     return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
 
-    
-    
 
-@app.post("/guardarDatos")
-async def guardar_datos(datos: DatosGuardar):
+
+
+@app.post("/guardarTarea")
+async def guardar_datos(datos: DatosTarea):
+    afectados = datos.afectados
+    voluntarios = datos.voluntarios
+    urgencia = datos.urgencia
+    categoria = datos.categoria
+    descripcion = datos.descripcion
+
+    print("Afectados:", afectados)
+    print("Voluntarios:", voluntarios)
+    print("Uregencia:", urgencia)
+    print("Categoria:", categoria)
+    print("Descripcion:", descripcion)
+
+    return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
+
+
+@app.put("/guardarTarea")
+async def guardar_datos(datos: DatosTarea):
     afectados = datos.afectados
     voluntarios = datos.voluntarios
     urgencia = datos.urgencia
@@ -380,6 +406,33 @@ def get_tareas():
         }
     ]
     return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
+
+
+@app.post("/guardarCatastrofe")
+async def guardar_catastrofe(datos: DatosCatastrofe):
+    print("Nombre:", datos.nombre)
+    print("Descripción:", datos.descripcion)
+    print("Tipo de catástrofe:", datos.TipoCatastrofe)
+    print("Magnitud:", datos.Magnitud)
+    print("Provincia:", datos.Provincia)
+    print("Estado:", datos.EstadoCatastrofe)
+
+    return JSONResponse(content={"mensaje": "Catástrofe guardada correctamente"}, status_code=200)
+
+
+@app.put("/actualizarCatastrofe/{id}")
+async def actualizar_catastrofe(id: int, datos: DatosCatastrofe):
+    print(f"Actualizando catástrofe con ID {id}:")
+    print("ID:", datos.id)
+    print("Nombre:", datos.nombre)
+    print("Descripción:", datos.descripcion)
+    print("Tipo de catástrofe:", datos.TipoCatastrofe)
+    print("Magnitud:", datos.Magnitud)
+    print("Provincia:", datos.Provincia)
+    print("Estado:", datos.EstadoCatastrofe)
+
+    return JSONResponse(content={"mensaje": f"Catástrofe {id} actualizada correctamente"}, status_code=200)
+
 
 
 @app.get("/catastrofe")
