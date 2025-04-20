@@ -315,7 +315,7 @@ def get_tareas():
                     "fecha": "2025-04-04",
                     "urgencia": "Baja",
                     "descripcion": "Inspección de viviendas afectadas por inundaciones.",
-                    "tipo": "Terremoto"
+                    "tipo": "Comida"
                 }
             ]
         },
@@ -357,7 +357,7 @@ def get_tareas():
                     "fecha": "2025-04-09",
                     "urgencia": "Media",
                     "descripcion": "Evaluación de daños en infraestructuras viales.",
-                    "tipo": "Terremoto"
+                    "tipo": "Comida"
                 },
                 {
                     "direccion": "Plaza del Sol 18, Córdoba",
@@ -365,7 +365,7 @@ def get_tareas():
                     "fecha": "2025-04-06",
                     "urgencia": "Alta",
                     "descripcion": "Distribución de alimentos y agua a los afectados.",
-                    "tipo": "Terremoto"
+                    "tipo": "Comida"
                 },
                 {
                     "direccion": "Carrer de Balmes 45, Barcelona",
@@ -373,7 +373,7 @@ def get_tareas():
                     "fecha": "2025-04-08",
                     "urgencia": "Alta",
                     "descripcion": "Atención a personas con discapacidad en albergues temporales.",
-                    "tipo": "Terremoto"
+                    "tipo": "Comida"
                 },
             ]
         },
@@ -467,7 +467,7 @@ def get_tareas():
         {
             "id": 1,
             "nombre": "Catastrofe 1",
-            "tipo": "Terremoto",
+            "tipo": "Comida",
             "magnitud": "Alta",
             "descripcion": "Gotzilla",
             "fechain": "Pendiente",
@@ -477,7 +477,7 @@ def get_tareas():
                 {
             "id": 2,
             "nombre": "Catastrofe 2",
-            "tipo": "Terremoto",
+            "tipo": "Comida",
             "magnitud": "Alta",
             "descripcion": "Gotzilla Robot",
             "fechain": "Pendiente",
@@ -497,7 +497,7 @@ def get_necesidades():
             "fecha": "2025-04-10",
             "urgencia": "Alta",
             "descripcion": "Falta de suministros médicos en la zona.",
-            "tipo": "Medicina"
+            "tipo": "Comida"
             
         },
         {
@@ -515,7 +515,7 @@ def get_necesidades():
             "fecha": "2025-04-08",
             "urgencia": "Alta",
             "descripcion": "Entrega urgente de alimentos.",
-            "tipo": "Terremoto"
+            "tipo": "Comida"
          
         },
         {
@@ -524,7 +524,15 @@ def get_necesidades():
             "fecha": "2025-04-07",
             "urgencia": "Baja",
             "descripcion": "Revisión estructural de viviendas.",
-            "tipo": "Alimento"   
+            "tipo": "Comida"  
+        },
+        {
+            "direccion": "Camino de los reyes 7, Málaga",
+            "estado": "CONFIRMADA",
+            "fecha": "2025-04-07",
+            "urgencia": "Baja",
+            "descripcion": "Revisión estructural de viviendas.",
+            "tipo": "Comida"  
         }
     ]
     return JSONResponse(content=necesidades, media_type="application/json; charset=utf-8")
