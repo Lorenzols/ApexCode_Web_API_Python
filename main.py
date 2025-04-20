@@ -31,6 +31,7 @@ class Necesidad(BaseModel):
     fecha: str
     urgencia: str
     descripcion: str
+    tipo: str
 
 class DatosTarea(BaseModel):
     afectados: List[Necesidad]
@@ -305,14 +306,16 @@ def get_tareas():
                     "estado": "PENDIENTE",
                     "fecha": "2025-04-10",
                     "urgencia": "Media",
-                    "descripcion": "Reparación de tendido eléctrico en zona rural."
+                    "descripcion": "Reparación de tendido eléctrico en zona rural.",
+                    "tipo": "Incendio"
                 },
                 {
                     "direccion": "Calle del Mar 14, Valencia",
                     "estado": "CONFIRMADA",
                     "fecha": "2025-04-04",
                     "urgencia": "Baja",
-                    "descripcion": "Inspección de viviendas afectadas por inundaciones."
+                    "descripcion": "Inspección de viviendas afectadas por inundaciones.",
+                    "tipo": "Terremoto"
                 }
             ]
         },
@@ -353,21 +356,24 @@ def get_tareas():
                     "estado": "EN_ESTUDIO",
                     "fecha": "2025-04-09",
                     "urgencia": "Media",
-                    "descripcion": "Evaluación de daños en infraestructuras viales."
+                    "descripcion": "Evaluación de daños en infraestructuras viales.",
+                    "tipo": "Terremoto"
                 },
                 {
                     "direccion": "Plaza del Sol 18, Córdoba",
                     "estado": "CONFIRMADA",
                     "fecha": "2025-04-06",
                     "urgencia": "Alta",
-                    "descripcion": "Distribución de alimentos y agua a los afectados."
+                    "descripcion": "Distribución de alimentos y agua a los afectados.",
+                    "tipo": "Terremoto"
                 },
                 {
                     "direccion": "Carrer de Balmes 45, Barcelona",
                     "estado": "EN_ESTUDIO",
                     "fecha": "2025-04-08",
                     "urgencia": "Alta",
-                    "descripcion": "Atención a personas con discapacidad en albergues temporales."
+                    "descripcion": "Atención a personas con discapacidad en albergues temporales.",
+                    "tipo": "Terremoto"
                 },
             ]
         },
@@ -431,7 +437,7 @@ async def guardar_catastrofe(datos: DatosCatastrofe):
 
 
 @app.put("/api/catastrofe")
-async def actualizar_catastrofe(id: int, datos: DatosCatastrofe):
+async def actualizar_catastrofe(datos: DatosCatastrofe):
     print("Nombre:", datos.nombre)
     print("Descripción:", datos.descripcion)
     print("Tipo de catástrofe:", datos.TipoCatastrofe)
@@ -441,8 +447,8 @@ async def actualizar_catastrofe(id: int, datos: DatosCatastrofe):
 
     return JSONResponse(content={"mensaje": f"Catástrofe actualizada correctamente"}, status_code=200)
 
-# @app.put("/api/catastrofe/")
-# async def actualizar_catastrofe(datos: DatosCatastrofe):
+# @app.put("/api/catastrofe/id")
+# async def actualizar_catastrofe(id: int, datos: DatosCatastrofe):
 #     #print(f"Actualizando catástrofe con ID {id}:")
 #     #print("ID:", datos.id)
 #     print("Nombre:", datos.nombre)
@@ -467,7 +473,17 @@ def get_tareas():
             "fechain": "Pendiente",
             "fechaout": "01/04/2001",
             "estado":"Activa"
-        }
+        },
+                {
+            "id": 2,
+            "nombre": "Catastrofe 2",
+            "tipo": "Terremoto",
+            "magnitud": "Alta",
+            "descripcion": "Gotzilla Robot",
+            "fechain": "Pendiente",
+            "fechaout": "01/04/2001",
+            "estado":"Activa"
+        },
     ]    
     return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
 
@@ -481,6 +497,7 @@ def get_necesidades():
             "fecha": "2025-04-10",
             "urgencia": "Alta",
             "descripcion": "Falta de suministros médicos en la zona.",
+            "tipo": "Medicina"
             
         },
         {
@@ -489,6 +506,7 @@ def get_necesidades():
             "fecha": "2025-04-09",
             "urgencia": "Media",
             "descripcion": "Necesidad de limpieza de calles.",
+            "tipo": "Limpieza"
         
         },
         {
@@ -497,6 +515,7 @@ def get_necesidades():
             "fecha": "2025-04-08",
             "urgencia": "Alta",
             "descripcion": "Entrega urgente de alimentos.",
+            "tipo": "Terremoto"
          
         },
         {
@@ -505,7 +524,7 @@ def get_necesidades():
             "fecha": "2025-04-07",
             "urgencia": "Baja",
             "descripcion": "Revisión estructural de viviendas.",
-           
+            "tipo": "Alimento"   
         }
     ]
     return JSONResponse(content=necesidades, media_type="application/json; charset=utf-8")
