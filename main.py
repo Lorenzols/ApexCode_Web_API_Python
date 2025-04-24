@@ -468,9 +468,9 @@ def get_tareas():
             "id": 1,
             "nombre": "Catastrofe 1",
             "tipo": "Comida",
-            "magnitud": "Alta",
+            "magnitud": 0,
             "descripcion": "Gotzilla",
-            "fechain": "Pendiente",
+            "fechain": "Activa",
             "fechaout": "01/04/2001",
             "estado":"Activa"
         },
@@ -478,9 +478,9 @@ def get_tareas():
             "id": 2,
             "nombre": "Catastrofe 2",
             "tipo": "Comida",
-            "magnitud": "Alta",
+            "magnitud": 2,
             "descripcion": "Gotzilla Robot",
-            "fechain": "Pendiente",
+            "fechain": "Activa",
             "fechaout": "01/04/2001",
             "estado":"Activa"
         },
