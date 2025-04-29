@@ -536,3 +536,17 @@ def get_necesidades():
         }
     ]
     return JSONResponse(content=necesidades, media_type="application/json; charset=utf-8")
+
+@app.get("/api/donaciones")
+def get_donaciones():
+    donaciones = [
+        {"nombre": "Laura", "tipo": "Alimentos", "descripcion": "10 cajas de comida no perecedera"},
+        {"nombre": "Pedro", "tipo": "Ropa", "descripcion": "30 mantas y ropa de abrigo para adultos y niños"},
+        {"nombre": "Clínica Sol", "tipo": "Medicinas", "descripcion": "Suministro de primeros auxilios y analgésicos"},
+        {"nombre": "Asociación Esperanza", "tipo": "Voluntariado", "descripcion": "10 voluntarios disponibles para limpieza y rescate"},
+        {"nombre": "Transporte Martínez", "tipo": "Logística", "descripcion": "Camión disponible para transportar víveres"},
+        {"nombre": "María", "tipo": "Agua", "descripcion": "50 garrafas de agua potable"},
+        {"nombre": "Lucas", "tipo": "Higiene", "descripcion": "Kits de higiene personal para 100 personas"},
+    ]
+    return JSONResponse(content=donaciones, media_type="application/json; charset=utf-8")
+
