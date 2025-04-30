@@ -424,6 +424,199 @@ def get_tareas():
     return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
 
 
+
+
+
+
+@app.get("/api/tarea/{idTarea}")
+def get_tareas(idTarea):
+    tareas = [
+        {
+            "id": 1,
+            "nombre": "Distribuir alimentos",
+            "prioridad": "Alta",
+            "categoria": "Comida",
+            "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+            "estado": "Pendiente",
+            "usuarios_voluntarios": [
+                {
+                    "nombre": "Paquito",
+                    "apellidos": "Chocolatero",
+                    "telefono": "123456789",
+                    "correo": "Paquito@gmail.com",
+                    "direccion": "CalledePaco 62 8 4",
+                    "prioridad": "Alta",
+                    "categoria": "Comida",
+                    "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Paquito"
+                },
+                {
+                    "nombre": "Pepito",
+                    "apellidos": "Casta",
+                    "telefono": "234567890",
+                    "correo": "Pepito@gmail.com",
+                    "direccion": "CalledePaco 61 8 4",
+                    "prioridad": "Alta",
+                    "categoria": "Comida",
+                    "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Pepito"
+                }
+            ],
+            "usuarios_asignados": [{
+                "nombre": "Laura",
+                "apellidos": "Montenegro",
+                "telefono": "654987321",
+                "correo": "laura.monte@gmail.com",
+                "direccion": "Avenida del Sol 45, 3B",
+                "prioridad": "Media",
+                "categoria": "Inundación",
+                "descripcion": "Ayuda en la evacuación de familias afectadas.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Laura"
+                },
+                {
+                "nombre": "Carlos",
+                "apellidos": "Del Río",
+                "telefono": "789456123",
+                "correo": "carlos.delrio@example.com",
+                "direccion": "Calle Lluvia 12, Bajo A",
+                "prioridad": "Baja",
+                "categoria": "Terremoto",
+                "descripcion": "Inspección de viviendas en riesgo estructural.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
+                }],
+            "necesidades": [
+                {
+                    "direccion": "Avenida de la Libertad 34, Madrid",
+                    "estado": "PENDIENTE",
+                    "fecha": "2025-04-10",
+                    "urgencia": "Media",
+                    "descripcion": "Reparación de tendido eléctrico en zona rural.",
+                    "tipo": "Incendio"
+                },
+                {
+                    "direccion": "Calle del Mar 14, Valencia",
+                    "estado": "CONFIRMADA",
+                    "fecha": "2025-04-04",
+                    "urgencia": "Baja",
+                    "descripcion": "Inspección de viviendas afectadas por inundaciones.",
+                    "tipo": "Comida"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "nombre": "Atención médica",
+            "prioridad": "Media",
+            "categoria": "Sanidad",
+            "descripcion": "Brindar primeros auxilios a los heridos.",
+            "estado": "En proceso",
+            "usuarios_voluntarios": [{
+                "nombre": "Susana",
+                "apellidos": "Valverde",
+                "telefono": "612345678",
+                "correo": "susana.valverde@mail.com",
+                "direccion": "Paseo de la Esperanza 21, 2ºD",
+                "prioridad": "Alta",
+                "categoria": "Rescate",
+                "descripcion": "Coordinación de equipos de búsqueda y rescate.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Susana"
+                },
+            ],
+            "usuarios_asignados": [{
+                "nombre": "Andrés",
+                "apellidos": "Giménez",
+                "telefono": "698745632",
+                "correo": "andresgimenez@yahoo.es",
+                "direccion": "Calle Roble 9, 1ºA",
+                "prioridad": "Media",
+                "categoria": "Logística",
+                "descripcion": "Gestión de suministros y transporte de materiales.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
+                }
+            ],
+            "necesidades": [
+                {
+                    "direccion": "Avenida de la Constitución 25, Cádiz",
+                    "estado": "EN_ESTUDIO",
+                    "fecha": "2025-04-09",
+                    "urgencia": "Media",
+                    "descripcion": "Evaluación de daños en infraestructuras viales.",
+                    "tipo": "Comida"
+                },
+                {
+                    "direccion": "Plaza del Sol 18, Córdoba",
+                    "estado": "CONFIRMADA",
+                    "fecha": "2025-04-06",
+                    "urgencia": "Alta",
+                    "descripcion": "Distribución de alimentos y agua a los afectados.",
+                    "tipo": "Comida"
+                },
+                {
+                    "direccion": "Carrer de Balmes 45, Barcelona",
+                    "estado": "EN_ESTUDIO",
+                    "fecha": "2025-04-08",
+                    "urgencia": "Alta",
+                    "descripcion": "Atención a personas con discapacidad en albergues temporales.",
+                    "tipo": "Comida"
+                },
+            ]
+        },
+        {
+            "id": 3,
+            "nombre": "Reconstrucción de viviendas",
+            "prioridad": "Alta",
+            "categoria": "Reconstrucción",
+            "descripcion": "Apoyo en la reconstrucción de viviendas dañadas.",
+            "estado": "Completada",
+            "usuarios_voluntarios": [{
+                "nombre": "Carlos",
+                "apellidos": "Giménez",
+                "telefono": "698745632",
+                "correo": "Carlosgimenez@yahoo.es",
+                "direccion": "Calle Roble 10, 1ºA",
+                "prioridad": "Media",
+                "categoria": "Logística",
+                "descripcion": "Gestión de suministros y transporte de materiales.",
+                "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
+                }],
+            "usuarios_asignados": [],
+            "necesidades": [
+                {
+                    "direccion": "Avenida de la Constitución 25, Cádiz",
+                    "estado": "EN_ESTUDIO",
+                    "fecha": "2025-04-09",
+                    "urgencia": "Media",
+                    "descripcion": "Evaluación de daños en infraestructuras viales."
+                },
+                {
+                    "direccion": "Plaza del Sol 18, Córdoba",
+                    "estado": "CONFIRMADA",
+                    "fecha": "2025-04-06",
+                    "urgencia": "Alta",
+                    "descripcion": "Distribución de alimentos y agua a los afectados."
+                },
+                {
+                    "direccion": "Carrer de Balmes 45, Barcelona",
+                    "estado": "EN_ESTUDIO",
+                    "fecha": "2025-04-08",
+                    "urgencia": "Alta",
+                    "descripcion": "Atención a personas con discapacidad en albergues temporales."
+                },
+            ]
+        }
+    ]
+
+    tarea=[]
+    for i in tareas:
+        if i[id]==idTarea:
+            tarea=i
+
+    return JSONResponse(content=tarea, media_type="application/json; charset=utf-8")
+
+
+
+
+
 @app.post("/api/catastrofe")
 async def guardar_catastrofe(datos: DatosCatastrofe):
     print("Nombre:", datos.nombre)
@@ -447,18 +640,19 @@ async def actualizar_catastrofe(datos: DatosCatastrofe):
 
     return JSONResponse(content={"mensaje": f"Catástrofe actualizada correctamente"}, status_code=200)
 
-# @app.put("/api/catastrofe/id")
-# async def actualizar_catastrofe(id: int, datos: DatosCatastrofe):
-#     #print(f"Actualizando catástrofe con ID {id}:")
-#     #print("ID:", datos.id)
-#     print("Nombre:", datos.nombre)
-#     print("Descripción:", datos.descripcion)
-#     print("Tipo de catástrofe:", datos.TipoCatastrofe)
-#     print("Magnitud:", datos.Magnitud)
-#     print("Provincia:", datos.Provincia)
-#     print("Estado:", datos.EstadoCatastrofe)
+@app.put("/api/catastrofe/{id}")
+async def actualizar_catastrofe(id: int, datos: DatosCatastrofe):
+    print(f"Actualizando catástrofe con ID {id}:")
+    print("ID:", datos.id)
+    print("Nombre:", datos.nombre)
+    print("Descripción:", datos.descripcion)
+    print("Tipo de catástrofe:", datos.TipoCatastrofe)
+    print("Magnitud:", datos.Magnitud)
+    print("Provincia:", datos.Provincia)
+    print("Estado:", datos.EstadoCatastrofe)
 
-#     return JSONResponse(content={"mensaje": f"Catástrofe actualizada correctamente"}, status_code=200)
+    return JSONResponse(content={"mensaje": f"Catástrofe actualizada correctamente"}, status_code=200)
+
 
 
 @app.get("/api/catastrofe")
@@ -470,18 +664,14 @@ def get_tareas():
             "tipo": "Comida",
             "magnitud": 0,
             "descripcion": "Gotzilla",
-            "fechain": "Activa",
-            "fechaout": "01/04/2001",
             "estado":"Activa"
         },
-                {
+        {
             "id": 2,
             "nombre": "Catastrofe 2",
             "tipo": "Comida",
             "magnitud": 2,
             "descripcion": "Gotzilla Robot",
-            "fechain": "Activa",
-            "fechaout": "01/04/2001",
             "estado":"Activa"
         },
     ]    
