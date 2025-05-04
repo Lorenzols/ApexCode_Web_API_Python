@@ -57,6 +57,9 @@ class DatosCatastrofeID(BaseModel):
     Magnitud: int
     Provincia: str
     EstadoCatastrofe: str
+class DatosDonaciones(BaseModel):
+    id_tarea: int
+    id_donacion: int
 
 
 @app.get("/usuariosAfectados")
@@ -730,13 +733,19 @@ def get_necesidades():
 @app.get("/api/donaciones")
 def get_donaciones():
     donaciones = [
-        {"nombre": "Laura", "tipo": "Alimentos", "descripcion": "10 cajas de comida no perecedera"},
-        {"nombre": "Pedro", "tipo": "Ropa", "descripcion": "30 mantas y ropa de abrigo para adultos y niños"},
-        {"nombre": "Clínica Sol", "tipo": "Medicinas", "descripcion": "Suministro de primeros auxilios y analgésicos"},
-        {"nombre": "Asociación Esperanza", "tipo": "Voluntariado", "descripcion": "10 voluntarios disponibles para limpieza y rescate"},
-        {"nombre": "Transporte Martínez", "tipo": "Logística", "descripcion": "Camión disponible para transportar víveres"},
-        {"nombre": "María", "tipo": "Agua", "descripcion": "50 garrafas de agua potable"},
-        {"nombre": "Lucas", "tipo": "Higiene", "descripcion": "Kits de higiene personal para 100 personas"},
+        {"id":1,"importe": 100},
+        {"id":2,"importe": 300},
+        {"id":3,"importe": 2000},
+        {"id":4,"importe": 32},
+        {"id":5,"importe": 40},
+        {"id":6,"importe": 2},
+        {"id":7,"importe": 326}
     ]
     return JSONResponse(content=donaciones, media_type="application/json; charset=utf-8")
 
+@app.post("/api/donaciones")
+async def guardar_donacionescatastrofe(datos: DatosDonaciones):
+    print("Id tareas:", datos.id_tarea)
+    print("Id donación:", datos.id_donacion)
+
+    return JSONResponse(content={"mensaje": "Donacion guardada correctamente"}, status_code=200)
