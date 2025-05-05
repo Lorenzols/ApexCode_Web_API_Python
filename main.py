@@ -660,19 +660,27 @@ def get_tareas():
     tareas = [
         {
             "id": 1,
-            "nombre": "Catastrofe 1",
-            "tipo": "Comida",
-            "magnitud": 0,
-            "descripcion": "Gotzilla",
+            "nombre": "ASDSCatastrofe 1",
+            "tipo": "Incendio",
+            "magnitud": 3,
+            "descripcion": "dasdGotzilla",
             "estado":"Activa"
         },
         {
             "id": 2,
             "nombre": "Catastrofe 2",
             "tipo": "Comida",
-            "magnitud": 2,
+            "magnitud": 0,
             "descripcion": "Gotzilla Robot",
             "estado":"Activa"
+        },
+                {
+            "id": 3,
+            "nombre": "Dsaatastrofe 2",
+            "tipo": "Apagón",
+            "magnitud": 1,
+            "descripcion": "Dementores",
+            "estado":"Finalizada"
         },
     ]    
     return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
