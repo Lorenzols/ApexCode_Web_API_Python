@@ -253,6 +253,9 @@ def get_tareas():
         {
             "id": 1,
             "nombre": "Distribuir alimentos",
+            "tipo_tarea": "Logística",
+            "zona": "Zona Sur",
+            "turno": "Mañana",
             "prioridad": "Alta",
             "categoria": "Comida",
             "descripcion": "Repartir alimentos a los afectados en la zona sur.",
@@ -267,6 +270,9 @@ def get_tareas():
                     "prioridad": "Alta",
                     "categoria": "Comida",
                     "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+                    "tipo_tarea": "Distribución",
+                    "zona": "Zona Sur",
+                    "turno": "Mañana",
                     "foto_perfil": "https://i.pravatar.cc/150?u=Paquito"
                 },
                 {
@@ -278,31 +284,42 @@ def get_tareas():
                     "prioridad": "Alta",
                     "categoria": "Comida",
                     "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+                    "tipo_tarea": "Distribución",
+                    "zona": "Zona Sur",
+                    "turno": "Mañana",
                     "foto_perfil": "https://i.pravatar.cc/150?u=Pepito"
                 }
             ],
-            "usuarios_asignados": [{
-                "nombre": "Laura",
-                "apellidos": "Montenegro",
-                "telefono": "654987321",
-                "correo": "laura.monte@gmail.com",
-                "direccion": "Avenida del Sol 45, 3B",
-                "prioridad": "Media",
-                "categoria": "Inundación",
-                "descripcion": "Ayuda en la evacuación de familias afectadas.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Laura"
+            "usuarios_asignados": [
+                {
+                    "nombre": "Laura",
+                    "apellidos": "Montenegro",
+                    "telefono": "654987321",
+                    "correo": "laura.monte@gmail.com",
+                    "direccion": "Avenida del Sol 45, 3B",
+                    "prioridad": "Media",
+                    "categoria": "Inundación",
+                    "descripcion": "Ayuda en la evacuación de familias afectadas.",
+                    "tipo_tarea": "Evacuación",
+                    "zona": "Zona Sur",
+                    "turno": "Tarde",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Laura"
                 },
                 {
-                "nombre": "Carlos",
-                "apellidos": "Del Río",
-                "telefono": "789456123",
-                "correo": "carlos.delrio@example.com",
-                "direccion": "Calle Lluvia 12, Bajo A",
-                "prioridad": "Baja",
-                "categoria": "Terremoto",
-                "descripcion": "Inspección de viviendas en riesgo estructural.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
-                }],
+                    "nombre": "Carlos",
+                    "apellidos": "Del Río",
+                    "telefono": "789456123",
+                    "correo": "carlos.delrio@example.com",
+                    "direccion": "Calle Lluvia 12, Bajo A",
+                    "prioridad": "Baja",
+                    "categoria": "Terremoto",
+                    "descripcion": "Inspección de viviendas en riesgo estructural.",
+                    "tipo_tarea": "Evaluación",
+                    "zona": "Zona Centro",
+                    "turno": "Noche",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
+                }
+            ],
             "necesidades": [
                 {
                     "direccion": "Avenida de la Libertad 34, Madrid",
@@ -325,32 +342,43 @@ def get_tareas():
         {
             "id": 2,
             "nombre": "Atención médica",
+            "tipo_tarea": "Emergencia Sanitaria",
+            "zona": "Zona Este",
+            "turno": "Tarde",
             "prioridad": "Media",
             "categoria": "Sanidad",
             "descripcion": "Brindar primeros auxilios a los heridos.",
             "estado": "En proceso",
-            "usuarios_voluntarios": [{
-                "nombre": "Susana",
-                "apellidos": "Valverde",
-                "telefono": "612345678",
-                "correo": "susana.valverde@mail.com",
-                "direccion": "Paseo de la Esperanza 21, 2ºD",
-                "prioridad": "Alta",
-                "categoria": "Rescate",
-                "descripcion": "Coordinación de equipos de búsqueda y rescate.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Susana"
-                },
+            "usuarios_voluntarios": [
+                {
+                    "nombre": "Susana",
+                    "apellidos": "Valverde",
+                    "telefono": "612345678",
+                    "correo": "susana.valverde@mail.com",
+                    "direccion": "Paseo de la Esperanza 21, 2ºD",
+                    "prioridad": "Alta",
+                    "categoria": "Rescate",
+                    "descripcion": "Coordinación de equipos de búsqueda y rescate.",
+                    "tipo_tarea": "Rescate",
+                    "zona": "Zona Este",
+                    "turno": "Tarde",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Susana"
+                }
             ],
-            "usuarios_asignados": [{
-                "nombre": "Andrés",
-                "apellidos": "Giménez",
-                "telefono": "698745632",
-                "correo": "andresgimenez@yahoo.es",
-                "direccion": "Calle Roble 9, 1ºA",
-                "prioridad": "Media",
-                "categoria": "Logística",
-                "descripcion": "Gestión de suministros y transporte de materiales.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
+            "usuarios_asignados": [
+                {
+                    "nombre": "Andrés",
+                    "apellidos": "Giménez",
+                    "telefono": "698745632",
+                    "correo": "andresgimenez@yahoo.es",
+                    "direccion": "Calle Roble 9, 1ºA",
+                    "prioridad": "Media",
+                    "categoria": "Logística",
+                    "descripcion": "Gestión de suministros y transporte de materiales.",
+                    "tipo_tarea": "Logística",
+                    "zona": "Zona Centro",
+                    "turno": "Mañana",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
                 }
             ],
             "necesidades": [
@@ -377,27 +405,35 @@ def get_tareas():
                     "urgencia": "Alta",
                     "descripcion": "Atención a personas con discapacidad en albergues temporales.",
                     "tipo": "Comida"
-                },
+                }
             ]
         },
         {
             "id": 3,
             "nombre": "Reconstrucción de viviendas",
+            "tipo_tarea": "Reconstrucción",
+            "zona": "Zona Norte",
+            "turno": "Completo",
             "prioridad": "Alta",
             "categoria": "Reconstrucción",
             "descripcion": "Apoyo en la reconstrucción de viviendas dañadas.",
             "estado": "Completada",
-            "usuarios_voluntarios": [{
-                "nombre": "Carlos",
-                "apellidos": "Giménez",
-                "telefono": "698745632",
-                "correo": "Carlosgimenez@yahoo.es",
-                "direccion": "Calle Roble 10, 1ºA",
-                "prioridad": "Media",
-                "categoria": "Logística",
-                "descripcion": "Gestión de suministros y transporte de materiales.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
-                }],
+            "usuarios_voluntarios": [
+                {
+                    "nombre": "Carlos",
+                    "apellidos": "Giménez",
+                    "telefono": "698745632",
+                    "correo": "Carlosgimenez@yahoo.es",
+                    "direccion": "Calle Roble 10, 1ºA",
+                    "prioridad": "Media",
+                    "categoria": "Logística",
+                    "descripcion": "Gestión de suministros y transporte de materiales.",
+                    "tipo_tarea": "Reconstrucción",
+                    "zona": "Zona Norte",
+                    "turno": "Completo",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
+                }
+            ],
             "usuarios_asignados": [],
             "necesidades": [
                 {
@@ -420,11 +456,12 @@ def get_tareas():
                     "fecha": "2025-04-08",
                     "urgencia": "Alta",
                     "descripcion": "Atención a personas con discapacidad en albergues temporales."
-                },
+                }
             ]
         }
     ]
     return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
+
 
 
 
