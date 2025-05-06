@@ -104,54 +104,83 @@ def get_usuarios_afectados():
 @app.get("/api/voluntario")
 def get_usuarios_ayudantes():
     ayudantes = [
-        {
-            "foto_perfil": "https://randomuser.me/api/portraits/men/15.jpg",
-            "nombre": "Javier",
-            "apellidos": "García Hernández",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Calle Gran Vía 10",
-            "prioridad": "Baja",
-            "categoria": "Logística",
-            "descripcion": "Encargado de la distribución de materiales y recursos a las zonas afectadas.",
-            "id":1
-        },
-        {
-            "foto_perfil": "https://randomuser.me/api/portraits/men/15.jpg",
-            "nombre": "Kaladin",
-            "apellidos": "García Hernández",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Calle Gran Vía 10",
-            "prioridad": "Baja",
-            "categoria": "Logística",
-            "descripcion": "Encargado de la distribución de materiales y recursos a las zonas afectadas.",
-            "id":2
-        },
-        {
-            "foto_perfil": "https://randomuser.me/api/portraits/women/22.jpg",
-            "nombre": "Ana",
-            "apellidos": "Fernández López",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Avenida Diagonal 50",
-            "prioridad": "Media",
-            "categoria": "Sanidad",
-            "descripcion": "Médica especializada en urgencias y atención a heridos.",
-            "id":3
-        },
-        {
-            "foto_perfil": "https://randomuser.me/api/portraits/men/27.jpg",
-            "nombre": "David",
-            "apellidos": "Martínez González",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Calle de la Paz 7",
-            "prioridad": "Alta",
-            "categoria": "Ingeniería",
-            "descripcion": "Ingeniero civil encargado de la evaluación de daños estructurales.",
-            "id":4
-        }
+  {
+    "id": 6,
+    "nombre": "Lucía",
+    "apellidos": "Rodríguez Martínez",
+    "telefono": "612345678",
+    "correo": "lucia.rm@example.com",
+    "direccion": "Calle Mayor 5, 3ºB",
+    "prioridad": "Alta",
+    "categoria": "Sanidad",
+    "descripcion": "Enfermera con experiencia en atención de urgencias.",
+    "tipo_tarea": "ATENCION_SANITARIA",
+    "zona": "Zona Sur",
+    "turno": "MANYANA",
+    "foto_perfil": "https://randomuser.me/api/portraits/women/12.jpg"
+  },
+  {
+    "id": 7,
+    "nombre": "Miguel",
+    "apellidos": "López Serrano",
+    "telefono": "623456789",
+    "correo": "miguel.lopez@gmail.com",
+    "direccion": "Avenida Libertad 22",
+    "prioridad": "Media",
+    "categoria": "Ingeniería",
+    "descripcion": "Arquitecto voluntario especializado en estructuras de emergencia.",
+    "tipo_tarea": "RECONSTRUCCION",
+    "zona": "Zona Este",
+    "turno": "TARDE",
+    "foto_perfil": "https://randomuser.me/api/portraits/men/33.jpg"
+  },
+  {
+    "id": 8,
+    "nombre": "Sofía",
+    "apellidos": "González Pérez",
+    "telefono": "634567890",
+    "correo": "sofia.gp@correo.es",
+    "direccion": "Plaza España 1",
+    "prioridad": "Baja",
+    "categoria": "Psicología",
+    "descripcion": "Psicóloga especializada en apoyo a víctimas de catástrofes.",
+    "tipo_tarea": "PSICOLOGOS",
+    "zona": "Centro",
+    "turno": "INDIFERENTE",
+    "foto_perfil": "https://randomuser.me/api/portraits/women/25.jpg"
+  },
+  {
+    "id": 9,
+    "nombre": "Andrés",
+    "apellidos": "Ruiz Torres",
+    "telefono": "645678901",
+    "correo": "aruiz.torres@mail.com",
+    "direccion": "Camino Real 18",
+    "prioridad": "Alta",
+    "categoria": "Logística",
+    "descripcion": "Encargado de coordinar el transporte de alimentos y ropa.",
+    "tipo_tarea": "DISTRIBUCION_DE_ALIMENTOS",
+    "zona": "Zona Oeste",
+    "turno": "NO_DISPONIBLE",
+    "foto_perfil": "https://randomuser.me/api/portraits/men/40.jpg"
+  },
+  {
+    "id": 10,
+    "nombre": "Elena",
+    "apellidos": "Navarro Gil",
+    "telefono": "656789012",
+    "correo": "elena.ng@hotmail.com",
+    "direccion": "Calle de la Luz 30",
+    "prioridad": "Media",
+    "categoria": "Otro",
+    "descripcion": "Voluntaria polivalente con formación en primeros auxilios.",
+    "tipo_tarea": "EQUIPO_DE_RESCATE",
+    "zona": "Zona Norte",
+    "turno": "TARDE",
+    "foto_perfil": "https://randomuser.me/api/portraits/women/44.jpg"
+  }
+
+
     ]
     return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
 
@@ -434,7 +463,20 @@ def get_tareas():
                     "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
                 }
             ],
-            "usuarios_asignados": [],
+            "usuarios_asignados": [ {
+                    "nombre": "Pepe",
+                    "apellidos": "Gomez",
+                    "telefono": "698007452",
+                    "correo": "Carlosgsaimenez@yahoo.es",
+                    "direccion": "Calle Rsaoble 10, 1ºA",
+                    "prioridad": "Media",
+                    "categoria": "Logística",
+                    "descripcion": "Gestión de suministros y transporte de materiales.",
+                    "tipo_tarea": "Reconstrucción",
+                    "zona": "Zona Norte",
+                    "turno": "Completo",
+                    "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
+                }],
             "necesidades": [
                 {
                     "direccion": "Avenida de la Constitución 25, Cádiz",
@@ -710,7 +752,7 @@ def get_tareas():
             "id": 2,
             "nombre": "Catastrofe 2",
             "tipo": "Comida",
-            "magnitud": 0,
+            "magnitud": 2,
             "descripcion": "Gotzilla Robot",
             "estado":"Activa"
         },
