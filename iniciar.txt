@@ -2,5 +2,5 @@ instalar = pip install fastapi uvicorn requests
 
 url = http://IP_PC:8787/usuariosAfectados
 
-Ejecutar servidor = uvicorn main:app --reload --host 192.168.0.79 --port 8787
+Ejecutar servidor = uvicorn main:app --reload --host 10.236.32.1 --port 8080
 

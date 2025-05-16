@@ -59,7 +59,7 @@ class DatosCatastrofeID(BaseModel):
     EstadoCatastrofe: str
 class DatosDonaciones(BaseModel):
     id_tarea: int
-    id_donacion: int
+    cantidad_donada: float
 
 
 @app.get("/usuariosAfectados")
@@ -817,22 +817,17 @@ def get_necesidades():
     ]
     return JSONResponse(content=necesidades, media_type="application/json; charset=utf-8")
 
-@app.get("/api/donaciones")
+@app.get("/api/donacionesMonetariasTotal")
 def get_donaciones():
     donaciones = [
-        {"id":1,"importe": 100},
-        {"id":2,"importe": 300},
-        {"id":3,"importe": 2000},
-        {"id":4,"importe": 32},
-        {"id":5,"importe": 40},
-        {"id":6,"importe": 2},
-        {"id":7,"importe": 326}
+        {"total": 243500}
     ]
     return JSONResponse(content=donaciones, media_type="application/json; charset=utf-8")
 
-@app.post("/api/donaciones")
+
+@app.post("/api/donacionesMonetarias")
 async def guardar_donacionescatastrofe(datos: DatosDonaciones):
     print("Id tareas:", datos.id_tarea)
-    print("Id donación:", datos.id_donacion)
+    print("Dinero donado:", datos.cantidad_donada)
 
     return JSONResponse(content={"mensaje": "Donacion guardada correctamente"}, status_code=200)
