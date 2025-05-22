@@ -820,13 +820,13 @@ def get_necesidades():
 @app.get("/api/donaciones")
 def get_donaciones():
     donaciones = [
-        {"id":1,"importe": 100},
-        {"id":2,"importe": 300},
-        {"id":3,"importe": 2000},
-        {"id":4,"importe": 32},
-        {"id":5,"importe": 40},
-        {"id":6,"importe": 2},
-        {"id":7,"importe": 326}
+        {"id":1,"importe": "100$"},
+        {"id":2,"importe": "Pan"},
+        {"id":3,"importe": "2000$"},
+        {"id":4,"importe": "32$"},
+        {"id":5,"importe": "40$"},
+        {"id":6,"importe": "Pala"},
+        {"id":7,"importe": "326$"}
     ]
     return JSONResponse(content=donaciones, media_type="application/json; charset=utf-8")
 
