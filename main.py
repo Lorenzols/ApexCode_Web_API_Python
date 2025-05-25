@@ -528,21 +528,24 @@ def get_tareas():
                     "estado": "EN_ESTUDIO",
                     "fecha": "2025-04-09",
                     "urgencia": "Media",
-                    "descripcion": "Evaluación de daños en infraestructuras viales."
+                    "descripcion": "Evaluación de daños en infraestructuras viales.",
+                    "tipo": "Comida"
                 },
                 {
                     "direccion": "Plaza del Sol 18, Córdoba",
                     "estado": "CONFIRMADA",
                     "fecha": "2025-04-06",
                     "urgencia": "Alta",
-                    "descripcion": "Distribución de alimentos y agua a los afectados."
+                    "descripcion": "Distribución de alimentos y agua a los afectados.",
+                    "tipo": "Comida"
                 },
                 {
                     "direccion": "Carrer de Balmes 45, Barcelona",
                     "estado": "EN_ESTUDIO",
                     "fecha": "2025-04-08",
                     "urgencia": "Alta",
-                    "descripcion": "Atención a personas con discapacidad en albergues temporales."
+                    "descripcion": "Atención a personas con discapacidad en albergues temporales.",
+                    "tipo": "Comida"
                 }
             ]
         }
