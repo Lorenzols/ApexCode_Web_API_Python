@@ -40,6 +40,51 @@ class DatosTarea(BaseModel):
     categoria: str
     descripcion: str
 
+class Recurso(BaseModel):
+    id: int = None # 'id' es opcional para POST, lo genera el backend
+    nombre: str
+    categoria: str
+    prioridad: str
+    descripcion: str
+    asignados: int
+    maximo: int
+
+class RecursoUpdateAsignados(BaseModel):
+    asignados: int
+
+recursos_db = [
+    {
+        "id": 1,
+        "nombre": "Agua Potable (Botellas 1L)",
+        "categoria": "comida",
+        "prioridad": "Alta",
+        "descripcion": "Agua embotellada para consumo directo.",
+        "asignados": 300,
+        "maximo": 1000
+    },
+    {
+        "id": 2,
+        "nombre": "Medicamento Analgésico",
+        "categoria": "medicamentos",
+        "prioridad": "Media",
+        "descripcion": "Pastillas para aliviar dolores menores.",
+        "asignados": 50,
+        "maximo": 200
+    },
+    {
+        "id": 3,
+        "nombre": "Tiendas de Campaña",
+        "categoria": "Construccion",
+        "prioridad": "Alta",
+        "descripcion": "Tiendas para 4 personas.",
+        "asignados": 10,
+        "maximo": 30
+    }
+]
+
+# Para generar IDs únicos
+next_recurso_id = max([r['id'] for r in recursos_db]) + 1 if recursos_db else 1
+
 class DatosCatastrofe(BaseModel):
     #id: int
     nombre: str
@@ -831,3 +876,35 @@ async def guardar_donacionescatastrofe(datos: DatosDonaciones):
     print("Dinero donado:", datos.cantidad_donada)
 
     return JSONResponse(content={"mensaje": "Donacion guardada correctamente"}, status_code=200)
+
+
+@app.get("/api/recursos", response_model=List[Recurso])
+def get_recursos():
+    """Obtener todos los recursos."""
+    return JSONResponse(content=recursos_db, media_type="application/json; charset=utf-8")
+
+@app.post("/api/recursos", response_model=Recurso, status_code=201)
+def create_recurso(recurso: Recurso):
+    """Crear un nuevo recurso."""
+    global next_recurso_id
+    new_recurso = recurso.model_dump() # O recurso.dict() en Pydantic v1
+    new_recurso["id"] = next_recurso_id
+    recursos_db.append(new_recurso)
+    next_recurso_id += 1
+    return JSONResponse(content=new_recurso, status_code=201) # 201 Created
+
+@app.put("/api/recursos/{recurso_id}", response_model=Recurso)
+def update_recurso(recurso_id: int, update_data: RecursoUpdateAsignados):
+    """Actualizar el campo 'asignados' de un recurso."""
+    for i, r in enumerate(recursos_db):
+        if r["id"] == recurso_id:
+            # Actualizar solo el campo 'asignados'
+            recursos_db[i]["asignados"] = update_data.asignados
+            # Opcional: validar que asignados no exceda el máximo
+            if recursos_db[i]["asignados"] > recursos_db[i]["maximo"]:
+                recursos_db[i]["asignados"] = recursos_db[i]["maximo"] # Limitar
+            return JSONResponse(content=recursos_db[i], status_code=200) # 200 OK
+    raise HTTPException(status_code=404, detail="Recurso no encontrado")
+
+# Asegúrate de importar HTTPException de fastapi
+from fastapi import FastAPI, HTTPException
