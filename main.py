@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List
 
 app = FastAPI()
@@ -39,15 +39,14 @@ class DatosTarea(BaseModel):
     urgencia: str
     categoria: str
     descripcion: str
-
+    
 class DatosCatastrofe(BaseModel):
-    #id: int
     nombre: str
     descripcion: str
-    TipoCatastrofe: str
-    Magnitud: int
-    Provincia: str
-    EstadoCatastrofe: str
+    tipo_catastrofe: str = Field(..., alias="tipo_catastrofe")
+    magnitud: int = Field(..., alias="magnitud")
+    provincia: str = Field(..., alias="provincia")
+    estado_catastrofe: str = Field(..., alias="estado_catastrofe")
 
 class DatosCatastrofeID(BaseModel):
     id: int
@@ -700,16 +699,14 @@ def get_tareas(idTarea):
 
 
 
-
-
 @app.post("/api/catastrofe")
 async def guardar_catastrofe(datos: DatosCatastrofe):
     print("Nombre:", datos.nombre)
     print("Descripción:", datos.descripcion)
-    print("Tipo de catástrofe:", datos.TipoCatastrofe)
-    print("Magnitud:", datos.Magnitud)
-    print("Provincia:", datos.Provincia)
-    print("Estado:", datos.EstadoCatastrofe)
+    print("Tipo de catástrofe:", datos.tipo_catastrofe)
+    print("Magnitud:", datos.magnitud)
+    print("Provincia:", datos.provincia)
+    print("Estado:", datos.estado_catastrofe)
 
     return JSONResponse(content={"mensaje": "Catástrofe guardada correctamente"}, status_code=200)
 
@@ -718,12 +715,12 @@ async def guardar_catastrofe(datos: DatosCatastrofe):
 async def actualizar_catastrofe(datos: DatosCatastrofe):
     print("Nombre:", datos.nombre)
     print("Descripción:", datos.descripcion)
-    print("Tipo de catástrofe:", datos.TipoCatastrofe)
-    print("Magnitud:", datos.Magnitud)
-    print("Provincia:", datos.Provincia)
-    print("Estado:", datos.EstadoCatastrofe)
+    print("Tipo de catástrofe:", datos.tipo_catastrofe)
+    print("Magnitud:", datos.magnitud)
+    print("Provincia:", datos.provincia)
+    print("Estado:", datos.estado_catastrofe)
 
-    return JSONResponse(content={"mensaje": f"Catástrofe actualizada correctamente"}, status_code=200)
+    return JSONResponse(content={"mensaje": "Catástrofe actualizada correctamente"}, status_code=200)
 
 @app.put("/api/catastrofe/{id}")
 async def actualizar_catastrofe(id: int, datos: DatosCatastrofe):
