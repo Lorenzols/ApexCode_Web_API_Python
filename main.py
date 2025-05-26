@@ -58,8 +58,8 @@ class DatosCatastrofeID(BaseModel):
     Provincia: str
     EstadoCatastrofe: str
 class DatosDonaciones(BaseModel):
-    idTarea: int
-    cantidadDonada: float
+    id_tarea: int
+    cantidad_donada: float
 
 
 @app.get("/usuariosAfectados")
@@ -483,21 +483,24 @@ def get_tareas():
                     "estado": "EN_ESTUDIO",
                     "fecha": "2025-04-09",
                     "urgencia": "Media",
-                    "descripcion": "Evaluación de daños en infraestructuras viales."
+                    "descripcion": "Evaluación de daños en infraestructuras viales.",
+                    "tipo": "Comida"
                 },
                 {
                     "direccion": "Plaza del Sol 18, Córdoba",
                     "estado": "CONFIRMADA",
                     "fecha": "2025-04-06",
                     "urgencia": "Alta",
-                    "descripcion": "Distribución de alimentos y agua a los afectados."
+                    "descripcion": "Distribución de alimentos y agua a los afectados.",
+                    "tipo": "Comida"
                 },
                 {
                     "direccion": "Carrer de Balmes 45, Barcelona",
                     "estado": "EN_ESTUDIO",
                     "fecha": "2025-04-08",
                     "urgencia": "Alta",
-                    "descripcion": "Atención a personas con discapacidad en albergues temporales."
+                    "descripcion": "Atención a personas con discapacidad en albergues temporales.",
+                    "tipo": "Comida"
                 }
             ]
         }
@@ -827,7 +830,7 @@ def get_donaciones():
 
 @app.post("/api/donacionesMonetarias")
 async def guardar_donacionescatastrofe(datos: DatosDonaciones):
-    print("Id tareas:", datos.idTarea)
-    print("Dinero donado:", datos.cantidadDonada)
+    print("Id tareas:", datos.id_tarea)
+    print("Dinero donado:", datos.cantidad_donada)
 
     return JSONResponse(content={"mensaje": "Donacion guardada correctamente"}, status_code=200)
