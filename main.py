@@ -876,3 +876,56 @@ async def guardar_donacionescatastrofe(datos: DatosDonaciones):
     print("Dinero donado:", datos.cantidad_donada)
 
     return JSONResponse(content={"mensaje": "Donacion guardada correctamente"}, status_code=200)
+
+
+
+@app.get("/api/panelDonaciones")
+def panel_donaciones():
+    response_data = {
+        "totalRecaudado": "243.500€",
+        "donacionesFisicas": 125,
+        "donantesActivos": 47,
+        "recursosDistribuidos": "68%",
+
+        "donaciones": [
+            {
+                "fecha": "2025-01-15",
+                "fuente": "Empresa X",
+                "categoria": "Empresas",
+                "importe": "15.000€",
+                "estado": "Confirmada"
+            },
+            {
+                "fecha": "2025-02-02",
+                "fuente": "Subvención estatal",
+                "categoria": "Subvenciones",
+                "importe": "25.000€",
+                "estado": "Confirmada"
+            },
+            {
+                "fecha": "2025-03-10",
+                "fuente": "Juan Pérez",
+                "categoria": "Donaciones privadas",
+                "importe": "500€",
+                "estado": "Pendiente"
+            },
+            {
+                "fecha": "2025-04-05",
+                "fuente": "Evento solidario",
+                "categoria": "Eventos",
+                "importe": "3.200€",
+                "estado": "Confirmada"
+            }
+        ],
+
+        "distribucionTipos": {
+            "Monetarias": 65,
+            "Alimentos": 18,
+            "Herramientas": 12,
+            "Medicamentos": 5
+        },
+
+        "evolucionMensual": [12000, 18000, 14500, 17000, 22000]
+    }
+
+    return JSONResponse(content=response_data, media_type="application/json; charset=utf-8")
