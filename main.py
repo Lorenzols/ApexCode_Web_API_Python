@@ -52,6 +52,30 @@ class Recurso(BaseModel):
 class RecursoUpdateAsignados(BaseModel):
     asignados: int
 
+class DatosCatastrofe(BaseModel):
+    nombre: str
+    descripcion: str
+    tipo_catastrofe: str = Field(..., alias="tipo_catastrofe")
+    magnitud: int = Field(..., alias="magnitud")
+    provincia: str = Field(..., alias="provincia")
+    estado_catastrofe: str = Field(..., alias="estado_catastrofe")
+
+class DatosCatastrofeID(BaseModel):
+    id: int
+    nombre: str
+    descripcion: str
+    tipo_catastrofe: str = Field(..., alias="tipo_catastrofe")
+    magnitud: int = Field(..., alias="magnitud")
+    provincia: str = Field(..., alias="provincia")
+    estado_catastrofe: str
+
+class DatosDonaciones(BaseModel):
+    id_tarea: int
+    cantidad_donada: float
+
+
+
+
 recursos_db = [
     {
         "id": 1,
@@ -82,33 +106,7 @@ recursos_db = [
     }
 ]
 
-# Para generar IDs únicos
-next_recurso_id = max([r['id'] for r in recursos_db]) + 1 if recursos_db else 1
-
-class DatosCatastrofe(BaseModel):
-    nombre: str
-    descripcion: str
-    tipo_catastrofe: str = Field(..., alias="tipo_catastrofe")
-    magnitud: int = Field(..., alias="magnitud")
-    provincia: str = Field(..., alias="provincia")
-    estado_catastrofe: str = Field(..., alias="estado_catastrofe")
-
-class DatosCatastrofeID(BaseModel):
-    id: int
-    nombre: str
-    descripcion: str
-    TipoCatastrofe: str
-    Magnitud: int
-    Provincia: str
-    EstadoCatastrofe: str
-class DatosDonaciones(BaseModel):
-    id_tarea: int
-    cantidad_donada: float
-
-
-@app.get("/usuariosAfectados")
-def get_usuarios_afectados():
-    usuarios = [
+usuarios = [
         {
             "foto_perfil": "https://randomuser.me/api/portraits/men/10.jpg",
             "nombre": "Carlos",
@@ -143,11 +141,9 @@ def get_usuarios_afectados():
             "descripcion": "Falta de agua potable y alimentos. Solicita recursos básicos."
         }
     ]
-    return JSONResponse(content=usuarios, media_type="application/json; charset=utf-8")
 
-@app.get("/api/voluntario")
-def get_usuarios_ayudantes():
-    ayudantes = [
+
+ayudantes = [
   {
     "id": 6,
     "nombre": "Lucía",
@@ -226,103 +222,9 @@ def get_usuarios_ayudantes():
 
 
     ]
-    return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
-
-@app.get("/api/voluntario/{id}")
-def get_usuario_ayudante_por_id(id: int):
-    ayudantes = [
-        {
-            "id":1,
-            "foto_perfil": "https://randomuser.me/api/portraits/men/15.jpg",
-            "nombre": "Javier",
-            "apellidos": "García Hernández",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Calle Gran Vía 10",
-            "prioridad": "Baja",
-            "categoria": "Logística",
-            "descripcion": "Encargado de la distribución de materiales y recursos a las zonas afectadas.",
-
-        },
-        {
-            "id":2,
-            "foto_perfil": "https://randomuser.me/api/portraits/men/15.jpg",
-            "nombre": "Kaladin",
-            "apellidos": "García Hernández",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Calle Gran Vía 10",
-            "prioridad": "Baja",
-            "categoria": "Logística",
-            "descripcion": "Encargado de la distribución de materiales y recursos a las zonas afectadas.",
-        },
-        {
-            "id":3,
-            "foto_perfil": "https://randomuser.me/api/portraits/women/22.jpg",
-            "nombre": "Ana",
-            "apellidos": "Fernández López",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Avenida Diagonal 50",
-            "prioridad": "Media",
-            "categoria": "Sanidad",
-            "descripcion": "Médica especializada en urgencias y atención a heridos.",
-        },
-        {
-            "id":4,
-            "foto_perfil": "https://randomuser.me/api/portraits/men/27.jpg",
-            "nombre": "David",
-            "apellidos": "Martínez González",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Calle de la Paz 7",
-            "prioridad": "Alta",
-            "categoria": "Ingeniería",
-            "descripcion": "Ingeniero civil encargado de la evaluación de daños estructurales.",
-        }
-    ]
-    return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
 
 
-
-
-@app.post("/api/tarea")
-async def guardar_datos(datos: DatosTarea):
-    afectados = datos.afectados
-    voluntarios = datos.voluntarios
-    urgencia = datos.urgencia
-    categoria = datos.categoria
-    descripcion = datos.descripcion
-
-    print("Afectados:", afectados)
-    print("Voluntarios:", voluntarios)
-    print("Uregencia:", urgencia)
-    print("Categoria:", categoria)
-    print("Descripcion:", descripcion)
-
-    return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
-
-
-@app.put("/api/tarea")
-async def guardar_datos(datos: DatosTarea):
-    afectados = datos.afectados
-    voluntarios = datos.voluntarios
-    urgencia = datos.urgencia
-    categoria = datos.categoria
-    descripcion = datos.descripcion
-
-    print("Afectados:", afectados)
-    print("Voluntarios:", voluntarios)
-    print("Uregencia:", urgencia)
-    print("Categoria:", categoria)
-    print("Descripcion:", descripcion)
-
-    return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
-
-
-@app.get("/api/tarea")
-def get_tareas():
-    tareas = [
+Tareas = [
         {
             "id": 1,
             "nombre": "Distribuir alimentos",
@@ -549,242 +451,8 @@ def get_tareas():
             ]
         }
     ]
-    return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
 
-
-
-
-
-
-
-@app.get("/api/tarea/{idTarea}")
-def get_tareas(idTarea):
-    tareas = [
-        {
-            "id": 1,
-            "nombre": "Distribuir alimentos",
-            "prioridad": "Alta",
-            "categoria": "Comida",
-            "descripcion": "Repartir alimentos a los afectados en la zona sur.",
-            "estado": "Pendiente",
-            "usuarios_voluntarios": [
-                {
-                    "nombre": "Paquito",
-                    "apellidos": "Chocolatero",
-                    "telefono": "123456789",
-                    "correo": "Paquito@gmail.com",
-                    "direccion": "CalledePaco 62 8 4",
-                    "prioridad": "Alta",
-                    "categoria": "Comida",
-                    "descripcion": "Repartir alimentos a los afectados en la zona sur.",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Paquito"
-                },
-                {
-                    "nombre": "Pepito",
-                    "apellidos": "Casta",
-                    "telefono": "234567890",
-                    "correo": "Pepito@gmail.com",
-                    "direccion": "CalledePaco 61 8 4",
-                    "prioridad": "Alta",
-                    "categoria": "Comida",
-                    "descripcion": "Repartir alimentos a los afectados en la zona sur.",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Pepito"
-                }
-            ],
-            "usuarios_asignados": [{
-                "nombre": "Laura",
-                "apellidos": "Montenegro",
-                "telefono": "654987321",
-                "correo": "laura.monte@gmail.com",
-                "direccion": "Avenida del Sol 45, 3B",
-                "prioridad": "Media",
-                "categoria": "Inundación",
-                "descripcion": "Ayuda en la evacuación de familias afectadas.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Laura"
-                },
-                {
-                "nombre": "Carlos",
-                "apellidos": "Del Río",
-                "telefono": "789456123",
-                "correo": "carlos.delrio@example.com",
-                "direccion": "Calle Lluvia 12, Bajo A",
-                "prioridad": "Baja",
-                "categoria": "Terremoto",
-                "descripcion": "Inspección de viviendas en riesgo estructural.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
-                }],
-            "necesidades": [
-                {
-                    "direccion": "Avenida de la Libertad 34, Madrid",
-                    "estado": "PENDIENTE",
-                    "fecha": "2025-04-10",
-                    "urgencia": "Media",
-                    "descripcion": "Reparación de tendido eléctrico en zona rural.",
-                    "tipo": "Incendio"
-                },
-                {
-                    "direccion": "Calle del Mar 14, Valencia",
-                    "estado": "CONFIRMADA",
-                    "fecha": "2025-04-04",
-                    "urgencia": "Baja",
-                    "descripcion": "Inspección de viviendas afectadas por inundaciones.",
-                    "tipo": "Comida"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "nombre": "Atención médica",
-            "prioridad": "Media",
-            "categoria": "Sanidad",
-            "descripcion": "Brindar primeros auxilios a los heridos.",
-            "estado": "En proceso",
-            "usuarios_voluntarios": [{
-                "nombre": "Susana",
-                "apellidos": "Valverde",
-                "telefono": "612345678",
-                "correo": "susana.valverde@mail.com",
-                "direccion": "Paseo de la Esperanza 21, 2ºD",
-                "prioridad": "Alta",
-                "categoria": "Rescate",
-                "descripcion": "Coordinación de equipos de búsqueda y rescate.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Susana"
-                },
-            ],
-            "usuarios_asignados": [{
-                "nombre": "Andrés",
-                "apellidos": "Giménez",
-                "telefono": "698745632",
-                "correo": "andresgimenez@yahoo.es",
-                "direccion": "Calle Roble 9, 1ºA",
-                "prioridad": "Media",
-                "categoria": "Logística",
-                "descripcion": "Gestión de suministros y transporte de materiales.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
-                }
-            ],
-            "necesidades": [
-                {
-                    "direccion": "Avenida de la Constitución 25, Cádiz",
-                    "estado": "EN_ESTUDIO",
-                    "fecha": "2025-04-09",
-                    "urgencia": "Media",
-                    "descripcion": "Evaluación de daños en infraestructuras viales.",
-                    "tipo": "Comida"
-                },
-                {
-                    "direccion": "Plaza del Sol 18, Córdoba",
-                    "estado": "CONFIRMADA",
-                    "fecha": "2025-04-06",
-                    "urgencia": "Alta",
-                    "descripcion": "Distribución de alimentos y agua a los afectados.",
-                    "tipo": "Comida"
-                },
-                {
-                    "direccion": "Carrer de Balmes 45, Barcelona",
-                    "estado": "EN_ESTUDIO",
-                    "fecha": "2025-04-08",
-                    "urgencia": "Alta",
-                    "descripcion": "Atención a personas con discapacidad en albergues temporales.",
-                    "tipo": "Comida"
-                },
-            ]
-        },
-        {
-            "id": 3,
-            "nombre": "Reconstrucción de viviendas",
-            "prioridad": "Alta",
-            "categoria": "Reconstrucción",
-            "descripcion": "Apoyo en la reconstrucción de viviendas dañadas.",
-            "estado": "Completada",
-            "usuarios_voluntarios": [{
-                "nombre": "Carlos",
-                "apellidos": "Giménez",
-                "telefono": "698745632",
-                "correo": "Carlosgimenez@yahoo.es",
-                "direccion": "Calle Roble 10, 1ºA",
-                "prioridad": "Media",
-                "categoria": "Logística",
-                "descripcion": "Gestión de suministros y transporte de materiales.",
-                "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
-                }],
-            "usuarios_asignados": [],
-            "necesidades": [
-                {
-                    "direccion": "Avenida de la Constitución 25, Cádiz",
-                    "estado": "EN_ESTUDIO",
-                    "fecha": "2025-04-09",
-                    "urgencia": "Media",
-                    "descripcion": "Evaluación de daños en infraestructuras viales."
-                },
-                {
-                    "direccion": "Plaza del Sol 18, Córdoba",
-                    "estado": "CONFIRMADA",
-                    "fecha": "2025-04-06",
-                    "urgencia": "Alta",
-                    "descripcion": "Distribución de alimentos y agua a los afectados."
-                },
-                {
-                    "direccion": "Carrer de Balmes 45, Barcelona",
-                    "estado": "EN_ESTUDIO",
-                    "fecha": "2025-04-08",
-                    "urgencia": "Alta",
-                    "descripcion": "Atención a personas con discapacidad en albergues temporales."
-                },
-            ]
-        }
-    ]
-
-    tarea=[]
-    for i in tareas:
-        if i[id]==idTarea:
-            tarea=i
-
-    return JSONResponse(content=tarea, media_type="application/json; charset=utf-8")
-
-
-
-@app.post("/api/catastrofe")
-async def guardar_catastrofe(datos: DatosCatastrofe):
-    print("Nombre:", datos.nombre)
-    print("Descripción:", datos.descripcion)
-    print("Tipo de catástrofe:", datos.tipo_catastrofe)
-    print("Magnitud:", datos.magnitud)
-    print("Provincia:", datos.provincia)
-    print("Estado:", datos.estado_catastrofe)
-
-    return JSONResponse(content={"mensaje": "Catástrofe guardada correctamente"}, status_code=200)
-
-
-@app.put("/api/catastrofe")
-async def actualizar_catastrofe(datos: DatosCatastrofe):
-    print("Nombre:", datos.nombre)
-    print("Descripción:", datos.descripcion)
-    print("Tipo de catástrofe:", datos.tipo_catastrofe)
-    print("Magnitud:", datos.magnitud)
-    print("Provincia:", datos.provincia)
-    print("Estado:", datos.estado_catastrofe)
-
-    return JSONResponse(content={"mensaje": "Catástrofe actualizada correctamente"}, status_code=200)
-
-@app.put("/api/catastrofe/{id}")
-async def actualizar_catastrofe(id: int, datos: DatosCatastrofe):
-    print(f"Actualizando catástrofe con ID {id}:")
-    print("ID:", datos.id)
-    print("Nombre:", datos.nombre)
-    print("Descripción:", datos.descripcion)
-    print("Tipo de catástrofe:", datos.TipoCatastrofe)
-    print("Magnitud:", datos.Magnitud)
-    print("Provincia:", datos.Provincia)
-    print("Estado:", datos.EstadoCatastrofe)
-
-    return JSONResponse(content={"mensaje": f"Catástrofe actualizada correctamente"}, status_code=200)
-
-
-
-@app.get("/api/catastrofe")
-def get_tareas():
-    tareas = [
+Catastrofes = [
         {
             "id": 1,
             "nombre": "ASDSCatastrofe 1",
@@ -810,12 +478,9 @@ def get_tareas():
             "estado":"Finalizada"
         },
     ]    
-    return JSONResponse(content=tareas, media_type="application/json; charset=utf-8")
 
 
-@app.get("/api/necesidad")
-def get_necesidades():
-    necesidades = [
+necesidades = [
         {
             "direccion": "Calle Mayor 12, Sevilla",
             "estado": "EN_ESTUDIO",
@@ -860,6 +525,192 @@ def get_necesidades():
             "tipo": "Comida"  
         }
     ]
+
+# Para generar IDs únicos
+next_recurso_id = max([r['id'] for r in recursos_db]) + 1 if recursos_db else 1
+
+
+
+@app.get("/usuariosAfectados")
+def get_usuarios_afectados():
+    return JSONResponse(content=usuarios, media_type="application/json; charset=utf-8")
+
+@app.get("/api/voluntario")
+def get_usuarios_ayudantes():
+    
+    return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
+
+@app.get("/api/voluntario/{id}")
+def get_usuario_ayudante_por_id(id: int):
+    
+    return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
+
+
+
+
+@app.post("/api/tarea")
+async def guardar_datos(datos: DatosTarea):
+    afectados = datos.afectados
+    voluntarios = datos.voluntarios
+    urgencia = datos.urgencia
+    categoria = datos.categoria
+    descripcion = datos.descripcion
+
+    print("Afectados:", afectados)
+    print("Voluntarios:", voluntarios)
+    print("Uregencia:", urgencia)
+    print("Categoria:", categoria)
+    print("Descripcion:", descripcion)
+
+    return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
+
+
+@app.put("/api/tarea")
+async def guardar_datos(datos: DatosTarea):
+    afectados = datos.afectados
+    voluntarios = datos.voluntarios
+    urgencia = datos.urgencia
+    categoria = datos.categoria
+    descripcion = datos.descripcion
+
+    print("Afectados:", afectados)
+    print("Voluntarios:", voluntarios)
+    print("Uregencia:", urgencia)
+    print("Categoria:", categoria)
+    print("Descripcion:", descripcion)
+
+    return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
+
+
+@app.get("/api/tarea")
+def get_tareas():
+    return JSONResponse(content=Tareas, media_type="application/json; charset=utf-8")
+
+
+
+
+
+@app.get("/api/tarea/{idTarea}")
+def get_tareas(idTarea):
+    
+    tarea=[]
+    for i in Tareas:
+        if i[id]==idTarea:
+            tarea=i
+
+    return JSONResponse(content=tarea, media_type="application/json; charset=utf-8")
+
+
+
+@app.post("/api/catastrofe")
+async def guardar_catastrofe(datos: DatosCatastrofe):
+    print("post:")
+    print("Nombre:", datos.nombre)
+    print("Descripción:", datos.descripcion)
+    print("Tipo de catástrofe:", datos.tipo_catastrofe)
+    print("Magnitud:", datos.magnitud)
+    print("Provincia:", datos.provincia)
+    print("Estado:", datos.estado_catastrofe)
+    print("...")
+    print(datos)
+    #ids_existentes = [catastrofe.id for catastrofe in Catastrofes]
+    
+    #ida=max(ids_existentes) + 1
+    ida=4
+
+    cata = {
+        "id": ida,
+        "nombre": datos.nombre,
+        "descripcion": datos.descripcion,
+        "tipo": datos.tipo_catastrofe,
+        "magnitud": datos.magnitud,
+        "provincia": datos.provincia,
+        "estado": datos.estado_catastrofe,
+    }
+    Catastrofes.append(cata)
+    return JSONResponse(content={"mensaje": "Catástrofe guardada correctamente"}, status_code=200)
+
+
+@app.put("/api/catastrofe")
+async def actualizar_catastrofe(datos: DatosCatastrofe):
+    print("Nombre:", datos.nombre)
+    print("Descripción:", datos.descripcion)
+    print("Tipo de catástrofe:", datos.tipo_catastrofe)
+    print("Magnitud:", datos.magnitud)
+    print("Provincia:", datos.provincia)
+    print("Estado:", datos.estado_catastrofe)
+
+    return JSONResponse(content={"mensaje": "Catástrofe actualizada correctamente"}, status_code=200)
+
+@app.put("/api/catastrofe/{id}")
+async def actualizar_catastrofe(id: int, datos: DatosCatastrofeID):
+    print(f"Actualizando catástrofe con ID {id}:")
+    print("ID:", datos.id)
+    print("Nombre:", datos.nombre)
+    print("Descripción:", datos.descripcion)
+    print("Tipo de catástrofe:", datos.TipoCatastrofe)
+    print("Magnitud:", datos.Magnitud)
+    print("Provincia:", datos.Provincia)
+    print("Estado:", datos.EstadoCatastrofe)
+
+    
+    # Verificamos si la catástrofe existe
+    if id not in Catastrofes:
+        raise HTTPException(status_code=404, detail="Catástrofe no encontrada")
+
+    # Actualizamos la información
+    Catastrofes[id] = {
+        "id": datos.id,
+        "nombre": datos.nombre,
+        "descripcion": datos.descripcion,
+        "tipo": datos.TipoCatastrofe,
+        "magnitud": datos.Magnitud,
+        "provincia": datos.Provincia,
+        "estado": datos.EstadoCatastrofe,
+    }
+
+    return JSONResponse(content={"mensaje": f"Catástrofe actualizada correctamente"}, status_code=200)
+
+@app.delete("/api/catastrofe/{idCatastrofe}")
+def eliminar_catastrofe(idCatastrofe: int):
+    for index, catastrofe in enumerate(Catastrofes):
+        if catastrofe["id"] == idCatastrofe:
+            print(catastrofe["id"])
+            print(idCatastrofe)
+            del Catastrofes[index]
+            return JSONResponse(
+                content={"mensaje": f"Catástrofe con ID {idCatastrofe} eliminada correctamente"},
+                status_code=200
+            )
+    
+    raise HTTPException(status_code=404, detail=f"No se encontró catástrofe con ID {idCatastrofe}")
+
+
+
+@app.delete("/api/tarea/{idTarea}")
+def eliminar_tarea(idTarea: int):
+    for index, tareas in enumerate(Tareas):
+        if tareas["id"] == idTarea:
+            print(tareas["id"])
+            print(idTarea)
+            del Tareas[index]
+            return JSONResponse(
+                content={"mensaje": f"Catástrofe con ID {idTarea} eliminada correctamente"},
+                status_code=200
+            )
+    
+    raise HTTPException(status_code=404, detail=f"No se encontró catástrofe con ID {idTarea}")
+
+
+@app.get("/api/catastrofe")
+def get_catastrofes():
+    
+    return JSONResponse(content=Catastrofes, media_type="application/json; charset=utf-8")
+
+
+@app.get("/api/necesidad")
+def get_necesidades():
+    
     return JSONResponse(content=necesidades, media_type="application/json; charset=utf-8")
 
 @app.get("/api/donacionesMonetariasTotal")
