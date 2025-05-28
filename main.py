@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from typing import List
+from fastapi import HTTPException
 
 app = FastAPI()
 
@@ -14,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Pydantic model para definir la estructura de los datos
+
 class Usuario(BaseModel):
     nombre: str
     apellidos: str
@@ -34,11 +35,14 @@ class Necesidad(BaseModel):
     tipo: str
 
 class DatosTarea(BaseModel):
-    afectados: List[Necesidad]
-    voluntarios: List[Usuario]
-    urgencia: str
+    id:int
+    nombre: str
+    prioridad: str
     categoria: str
     descripcion: str
+    estado: str
+    voluntarios_asignados: List[Usuario]
+    necesidades: List[Necesidad]
     
 class Recurso(BaseModel):
     id: int = None # 'id' es opcional para POST, lo genera el backend
@@ -72,7 +76,6 @@ class DatosCatastrofeID(BaseModel):
 class DatosDonaciones(BaseModel):
     id_tarea: int
     cantidad_donada: float
-
 
 
 
@@ -141,7 +144,6 @@ usuarios = [
             "descripcion": "Falta de agua potable y alimentos. Solicita recursos básicos."
         }
     ]
-
 
 ayudantes = [
   {
@@ -222,7 +224,6 @@ ayudantes = [
 
 
     ]
-
 
 Tareas = [
         {
@@ -479,7 +480,6 @@ Catastrofes = [
         },
     ]    
 
-
 necesidades = [
         {
             "direccion": "Calle Mayor 12, Sevilla",
@@ -530,80 +530,14 @@ necesidades = [
 next_recurso_id = max([r['id'] for r in recursos_db]) + 1 if recursos_db else 1
 
 
+#Metodos de catastrofes
 
-@app.get("/usuariosAfectados")
-def get_usuarios_afectados():
-    return JSONResponse(content=usuarios, media_type="application/json; charset=utf-8")
-
-@app.get("/api/voluntario")
-def get_usuarios_ayudantes():
-    
-    return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
-
-@app.get("/api/voluntario/{id}")
-def get_usuario_ayudante_por_id(id: int):
-    
-    return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
-
-
-
-
-@app.post("/api/tarea")
-async def guardar_datos(datos: DatosTarea):
-    afectados = datos.afectados
-    voluntarios = datos.voluntarios
-    urgencia = datos.urgencia
-    categoria = datos.categoria
-    descripcion = datos.descripcion
-
-    print("Afectados:", afectados)
-    print("Voluntarios:", voluntarios)
-    print("Uregencia:", urgencia)
-    print("Categoria:", categoria)
-    print("Descripcion:", descripcion)
-
-    return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
-
-
-@app.put("/api/tarea")
-async def guardar_datos(datos: DatosTarea):
-    afectados = datos.afectados
-    voluntarios = datos.voluntarios
-    urgencia = datos.urgencia
-    categoria = datos.categoria
-    descripcion = datos.descripcion
-
-    print("Afectados:", afectados)
-    print("Voluntarios:", voluntarios)
-    print("Uregencia:", urgencia)
-    print("Categoria:", categoria)
-    print("Descripcion:", descripcion)
-
-    return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
-
-
-@app.get("/api/tarea")
-def get_tareas():
-    return JSONResponse(content=Tareas, media_type="application/json; charset=utf-8")
-
-
-
-
-
-@app.get("/api/tarea/{idTarea}")
-def get_tareas(idTarea):
-    
-    tarea=[]
-    for i in Tareas:
-        if i[id]==idTarea:
-            tarea=i
-
-    return JSONResponse(content=tarea, media_type="application/json; charset=utf-8")
-
-
+@app.get("/api/catastrofe")
+def get_catastrofes():
+    return JSONResponse(content=Catastrofes, media_type="application/json; charset=utf-8")
 
 @app.post("/api/catastrofe")
-async def guardar_catastrofe(datos: DatosCatastrofe):
+async def guardar_catastrofe(datos: DatosCatastrofeID):
     print("post:")
     print("Nombre:", datos.nombre)
     print("Descripción:", datos.descripcion)
@@ -613,10 +547,10 @@ async def guardar_catastrofe(datos: DatosCatastrofe):
     print("Estado:", datos.estado_catastrofe)
     print("...")
     print(datos)
-    #ids_existentes = [catastrofe.id for catastrofe in Catastrofes]
-    
-    #ida=max(ids_existentes) + 1
-    ida=4
+
+    ids_existentes = [catastrof["id"] for catastrof in Catastrofes]
+    ida = max(ids_existentes, default=0) + 1
+    datos.id = ida
 
     cata = {
         "id": ida,
@@ -627,20 +561,9 @@ async def guardar_catastrofe(datos: DatosCatastrofe):
         "provincia": datos.provincia,
         "estado": datos.estado_catastrofe,
     }
+
     Catastrofes.append(cata)
     return JSONResponse(content={"mensaje": "Catástrofe guardada correctamente"}, status_code=200)
-
-
-@app.put("/api/catastrofe")
-async def actualizar_catastrofe(datos: DatosCatastrofe):
-    print("Nombre:", datos.nombre)
-    print("Descripción:", datos.descripcion)
-    print("Tipo de catástrofe:", datos.tipo_catastrofe)
-    print("Magnitud:", datos.magnitud)
-    print("Provincia:", datos.provincia)
-    print("Estado:", datos.estado_catastrofe)
-
-    return JSONResponse(content={"mensaje": "Catástrofe actualizada correctamente"}, status_code=200)
 
 @app.put("/api/catastrofe/{id}")
 async def actualizar_catastrofe(id: int, datos: DatosCatastrofeID):
@@ -648,25 +571,27 @@ async def actualizar_catastrofe(id: int, datos: DatosCatastrofeID):
     print("ID:", datos.id)
     print("Nombre:", datos.nombre)
     print("Descripción:", datos.descripcion)
-    print("Tipo de catástrofe:", datos.TipoCatastrofe)
-    print("Magnitud:", datos.Magnitud)
-    print("Provincia:", datos.Provincia)
-    print("Estado:", datos.EstadoCatastrofe)
+    print("Tipo de catástrofe:", datos.tipo_catastrofe)
+    print("Magnitud:", datos.magnitud)
+    print("Provincia:", datos.provincia)
+    print("Estado:", datos.estado_catastrofe)
 
     
-    # Verificamos si la catástrofe existe
-    if id not in Catastrofes:
+    # Buscar el índice del elemento con el ID dado
+    index = next((i for i, c in enumerate(Catastrofes) if c["id"] == id), None)
+
+    if index is None:
         raise HTTPException(status_code=404, detail="Catástrofe no encontrada")
 
-    # Actualizamos la información
-    Catastrofes[id] = {
+    # Actualizar los datos
+    Catastrofes[index] = {
         "id": datos.id,
         "nombre": datos.nombre,
         "descripcion": datos.descripcion,
-        "tipo": datos.TipoCatastrofe,
-        "magnitud": datos.Magnitud,
-        "provincia": datos.Provincia,
-        "estado": datos.EstadoCatastrofe,
+        "tipo": datos.tipo_catastrofe,
+        "magnitud": datos.magnitud,
+        "provincia": datos.provincia,
+        "estado": datos.estado_catastrofe,
     }
 
     return JSONResponse(content={"mensaje": f"Catástrofe actualizada correctamente"}, status_code=200)
@@ -687,6 +612,80 @@ def eliminar_catastrofe(idCatastrofe: int):
 
 
 
+
+#Metodos de tareas
+
+@app.get("/api/tarea")
+def get_tareas():
+    return JSONResponse(content=Tareas, media_type="application/json; charset=utf-8")
+
+@app.get("/api/tarea/{idTarea}")
+def get_tareas(idTarea):
+    
+    tarea=[]
+    for i in Tareas:
+        if i[id]==idTarea:
+            tarea=i
+
+    return JSONResponse(content=tarea, media_type="application/json; charset=utf-8")
+
+@app.post("/api/tarea")
+async def crear_tarea(datos: DatosTarea):
+
+    print("Nombre:", datos.nombre)
+    print("Descripción:", datos.descripcion)
+    print("Prioridad:", datos.prioridad)
+    print("Categoría:", datos.categoria)
+    print("Estado:", datos.estado)
+    print("Voluntarios asignados:", datos.voluntarios_asignados)
+    print("Necesidades:", datos.necesidades)
+
+    ids_existentes = [t["id"] for t in Tareas]
+    nuevo_id = max(ids_existentes, default=0) + 1 if datos.id == 0 else datos.id
+
+    tarea = {
+        "id": nuevo_id,
+        "nombre": datos.nombre,
+        "descripcion": datos.descripcion,
+        "prioridad": datos.prioridad,
+        "categoria": datos.categoria,
+        "estado": datos.estado,
+        "voluntarios_asignados": [v.dict() for v in datos.voluntarios_asignados],
+        "necesidades": [n.dict() for n in datos.necesidades]
+    }
+
+    Tareas.append(tarea)
+
+    return JSONResponse(content={"mensaje": "Datos guardados correctamente"}, status_code=200)
+
+@app.put("/api/tarea/{id}")
+async def modificar_tarea(id: int, datos: DatosTarea):
+    print("Nombre:", datos.nombre)
+    print("Descripción:", datos.descripcion)
+    print("Prioridad:", datos.prioridad)
+    print("Categoría:", datos.categoria)
+    print("Estado:", datos.estado)
+    print("Voluntarios asignados:", datos.voluntarios_asignados)
+    print("Necesidades:", datos.necesidades)
+
+    index = next((i for i, c in enumerate(Tareas) if c["id"] == id), None)
+
+    if index is None:
+        raise HTTPException(status_code=404, detail="Tarea no encontrada")
+
+    Tareas[index] = {
+        "id": id,
+        "nombre": datos.nombre,
+        "descripcion": datos.descripcion,
+        "prioridad": datos.prioridad,
+        "categoria": datos.categoria,
+        "estado": datos.estado,
+        "voluntarios_asignados": [v.dict() for v in datos.voluntarios_asignados],
+        "necesidades": [n.dict() for n in datos.necesidades]
+    }
+
+    return JSONResponse(content={"mensaje": "Tarea modificada correctamente"}, status_code=200)
+
 @app.delete("/api/tarea/{idTarea}")
 def eliminar_tarea(idTarea: int):
     for index, tareas in enumerate(Tareas):
@@ -702,10 +701,30 @@ def eliminar_tarea(idTarea: int):
     raise HTTPException(status_code=404, detail=f"No se encontró catástrofe con ID {idTarea}")
 
 
-@app.get("/api/catastrofe")
-def get_catastrofes():
+
+
+
+
+
+
+@app.get("/usuariosAfectados")
+def get_usuarios_afectados():
+    return JSONResponse(content=usuarios, media_type="application/json; charset=utf-8")
+
+@app.get("/api/voluntario")
+def get_usuarios_ayudantes():
     
-    return JSONResponse(content=Catastrofes, media_type="application/json; charset=utf-8")
+    return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
+
+@app.get("/api/voluntario/{id}")
+def get_usuario_ayudante_por_id(id: int):
+    
+    return JSONResponse(content=ayudantes, media_type="application/json; charset=utf-8")
+
+
+
+
+
 
 
 @app.get("/api/necesidad")
