@@ -81,151 +81,6 @@ class DatosDonaciones(BaseModel):
 
 
 
-recursos_db = [
-    {
-        "id": 1,
-        "nombre": "Agua Potable (Botellas 1L)",
-        "categoria": "comida",
-        "prioridad": "Alta",
-        "descripcion": "Agua embotellada para consumo directo.",
-        "asignados": 300,
-        "maximo": 1000
-    },
-    {
-        "id": 2,
-        "nombre": "Medicamento Analgésico",
-        "categoria": "medicamentos",
-        "prioridad": "Media",
-        "descripcion": "Pastillas para aliviar dolores menores.",
-        "asignados": 50,
-        "maximo": 200
-    },
-    {
-        "id": 3,
-        "nombre": "Tiendas de Campaña",
-        "categoria": "Construccion",
-        "prioridad": "Alta",
-        "descripcion": "Tiendas para 4 personas.",
-        "asignados": 10,
-        "maximo": 30
-    }
-]
-
-usuarios = [
-        {
-            "fotoPerfil": "https://randomuser.me/api/portraits/men/10.jpg",
-            "nombre": "Carlos",
-            "apellidos": "Martínez López",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Calle Río Guadalquivir 14",
-            "prioridad": "Alta",
-            "categoria": "Reconstrucción",
-            "descripcion": "Casa gravemente dañada por inundaciones. Necesita reconstrucción urgente."
-        },
-        {
-            "fotoPerfil": "https://randomuser.me/api/portraits/women/45.jpg",
-            "nombre": "Lucía",
-            "apellidos": "Gómez Pérez",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Avenida del Sol 22",
-            "prioridad": "Media",
-            "categoria": "Limpieza",
-            "descripcion": "Zona afectada por barro y escombros. Se requiere equipo de limpieza."
-        },
-        {
-            "fotoPerfil": "https://randomuser.me/api/portraits/men/32.jpg",
-            "nombre": "Andrés",
-            "apellidos": "Ruiz Sánchez",
-            "telefono": "321123321",
-            "correo": "ejemplo@gmail.com",
-            "direccion": "Camino de la Sierra 5",
-            "prioridad": "Baja",
-            "categoria": "Solicitar recursos",
-            "descripcion": "Falta de agua potable y alimentos. Solicita recursos básicos."
-        }
-    ]
-
-ayudantes = [
-  {
-    "id": 6,
-    "nombre": "Lucía",
-    "apellidos": "Rodríguez Martínez",
-    "telefono": "612345678",
-    "correo": "lucia.rm@example.com",
-    "direccion": "Calle Mayor 5, 3ºB",
-    "prioridad": "Alta",
-    "categoria": "Sanidad",
-    "descripcion": "Enfermera con experiencia en atención de urgencias.",
-    "tipo_tarea": "ATENCION_SANITARIA",
-    "zona": "Zona Sur",
-    "turno": "MANYANA",
-    "fotoPerfil": "https://randomuser.me/api/portraits/women/12.jpg"
-  },
-  {
-    "id": 7,
-    "nombre": "Miguel",
-    "apellidos": "López Serrano",
-    "telefono": "623456789",
-    "correo": "miguel.lopez@gmail.com",
-    "direccion": "Avenida Libertad 22",
-    "prioridad": "Media",
-    "categoria": "Ingeniería",
-    "descripcion": "Arquitecto voluntario especializado en estructuras de emergencia.",
-    "tipo_tarea": "RECONSTRUCCION",
-    "zona": "Zona Este",
-    "turno": "TARDE",
-    "fotoPerfil": "https://randomuser.me/api/portraits/men/33.jpg"
-  },
-  {
-    "id": 8,
-    "nombre": "Sofía",
-    "apellidos": "González Pérez",
-    "telefono": "634567890",
-    "correo": "sofia.gp@correo.es",
-    "direccion": "Plaza España 1",
-    "prioridad": "Baja",
-    "categoria": "Psicología",
-    "descripcion": "Psicóloga especializada en apoyo a víctimas de catástrofes.",
-    "tipo_tarea": "PSICOLOGOS",
-    "zona": "Centro",
-    "turno": "INDIFERENTE",
-    "fotoPerfil": "https://randomuser.me/api/portraits/women/25.jpg"
-  },
-  {
-    "id": 9,
-    "nombre": "Andrés",
-    "apellidos": "Ruiz Torres",
-    "telefono": "645678901",
-    "correo": "aruiz.torres@mail.com",
-    "direccion": "Camino Real 18",
-    "prioridad": "Alta",
-    "categoria": "Logística",
-    "descripcion": "Encargado de coordinar el transporte de alimentos y ropa.",
-    "tipo_tarea": "DISTRIBUCION_DE_ALIMENTOS",
-    "zona": "Zona Oeste",
-    "turno": "NO_DISPONIBLE",
-    "fotoPerfil": "https://randomuser.me/api/portraits/men/40.jpg"
-  },
-  {
-    "id": 10,
-    "nombre": "Elena",
-    "apellidos": "Navarro Gil",
-    "telefono": "656789012",
-    "correo": "elena.ng@hotmail.com",
-    "direccion": "Calle de la Luz 30",
-    "prioridad": "Media",
-    "categoria": "Otro",
-    "descripcion": "Voluntaria polivalente con formación en primeros auxilios.",
-    "tipo_tarea": "EQUIPO_DE_RESCATE",
-    "zona": "Zona Norte",
-    "turno": "TARDE",
-    "fotoPerfil": "https://randomuser.me/api/portraits/women/44.jpg"
-  }
-
-
-    ]
 
 Tareas = [
     {
@@ -495,6 +350,158 @@ necesidades = [
         }
     ]
 
+recursos_db = [
+    {
+        "id": 1,
+        "nombre": "Agua Potable (Botellas 1L)",
+        "categoria": "comida",
+        "prioridad": "Alta",
+        "descripcion": "Agua embotellada para consumo directo.",
+        "asignados": 300,
+        "maximo": 1000
+    },
+    {
+        "id": 2,
+        "nombre": "Medicamento Analgésico",
+        "categoria": "medicamentos",
+        "prioridad": "Media",
+        "descripcion": "Pastillas para aliviar dolores menores.",
+        "asignados": 50,
+        "maximo": 200
+    },
+    {
+        "id": 3,
+        "nombre": "Tiendas de Campaña",
+        "categoria": "Construccion",
+        "prioridad": "Alta",
+        "descripcion": "Tiendas para 4 personas.",
+        "asignados": 10,
+        "maximo": 30
+    }
+]
+
+usuarios = [
+        {
+            "fotoPerfil": "https://randomuser.me/api/portraits/men/10.jpg",
+            "nombre": "Carlos",
+            "apellidos": "Martínez López",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
+            "direccion": "Calle Río Guadalquivir 14",
+            "prioridad": "Alta",
+            "categoria": "Reconstrucción",
+            "descripcion": "Casa gravemente dañada por inundaciones. Necesita reconstrucción urgente."
+        },
+        {
+            "fotoPerfil": "https://randomuser.me/api/portraits/women/45.jpg",
+            "nombre": "Lucía",
+            "apellidos": "Gómez Pérez",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
+            "direccion": "Avenida del Sol 22",
+            "prioridad": "Media",
+            "categoria": "Limpieza",
+            "descripcion": "Zona afectada por barro y escombros. Se requiere equipo de limpieza."
+        },
+        {
+            "fotoPerfil": "https://randomuser.me/api/portraits/men/32.jpg",
+            "nombre": "Andrés",
+            "apellidos": "Ruiz Sánchez",
+            "telefono": "321123321",
+            "correo": "ejemplo@gmail.com",
+            "direccion": "Camino de la Sierra 5",
+            "prioridad": "Baja",
+            "categoria": "Solicitar recursos",
+            "descripcion": "Falta de agua potable y alimentos. Solicita recursos básicos."
+        }
+    ]
+
+ayudantes = [
+  {
+    "id": 6,
+    "nombre": "Lucía",
+    "apellidos": "Rodríguez Martínez",
+    "telefono": "612345678",
+    "correo": "lucia.rm@example.com",
+    "direccion": "Calle Mayor 5, 3ºB",
+    "prioridad": "Alta",
+    "categoria": "Sanidad",
+    "descripcion": "Enfermera con experiencia en atención de urgencias.",
+    "tipo_tarea": "ATENCION_SANITARIA",
+    "zona": "Zona Sur",
+    "turno": "MANYANA",
+    "fotoPerfil": "https://randomuser.me/api/portraits/women/12.jpg"
+  },
+  {
+    "id": 7,
+    "nombre": "Miguel",
+    "apellidos": "López Serrano",
+    "telefono": "623456789",
+    "correo": "miguel.lopez@gmail.com",
+    "direccion": "Avenida Libertad 22",
+    "prioridad": "Media",
+    "categoria": "Ingeniería",
+    "descripcion": "Arquitecto voluntario especializado en estructuras de emergencia.",
+    "tipo_tarea": "RECONSTRUCCION",
+    "zona": "Zona Este",
+    "turno": "TARDE",
+    "fotoPerfil": "https://randomuser.me/api/portraits/men/33.jpg"
+  },
+  {
+    "id": 8,
+    "nombre": "Sofía",
+    "apellidos": "González Pérez",
+    "telefono": "634567890",
+    "correo": "sofia.gp@correo.es",
+    "direccion": "Plaza España 1",
+    "prioridad": "Baja",
+    "categoria": "Psicología",
+    "descripcion": "Psicóloga especializada en apoyo a víctimas de catástrofes.",
+    "tipo_tarea": "PSICOLOGOS",
+    "zona": "Centro",
+    "turno": "INDIFERENTE",
+    "fotoPerfil": "https://randomuser.me/api/portraits/women/25.jpg"
+  },
+  {
+    "id": 9,
+    "nombre": "Andrés",
+    "apellidos": "Ruiz Torres",
+    "telefono": "645678901",
+    "correo": "aruiz.torres@mail.com",
+    "direccion": "Camino Real 18",
+    "prioridad": "Alta",
+    "categoria": "Logística",
+    "descripcion": "Encargado de coordinar el transporte de alimentos y ropa.",
+    "tipo_tarea": "DISTRIBUCION_DE_ALIMENTOS",
+    "zona": "Zona Oeste",
+    "turno": "NO_DISPONIBLE",
+    "fotoPerfil": "https://randomuser.me/api/portraits/men/40.jpg"
+  },
+  {
+    "id": 10,
+    "nombre": "Elena",
+    "apellidos": "Navarro Gil",
+    "telefono": "656789012",
+    "correo": "elena.ng@hotmail.com",
+    "direccion": "Calle de la Luz 30",
+    "prioridad": "Media",
+    "categoria": "Otro",
+    "descripcion": "Voluntaria polivalente con formación en primeros auxilios.",
+    "tipo_tarea": "EQUIPO_DE_RESCATE",
+    "zona": "Zona Norte",
+    "turno": "TARDE",
+    "fotoPerfil": "https://randomuser.me/api/portraits/women/44.jpg"
+  }
+
+
+    ]
+
+donacionesmonetarias = []
+
+donacionestotales = [
+        {"total": 243500}
+    ]
+
 # Para generar IDs únicos
 next_recurso_id = max([r['id'] for r in recursos_db]) + 1 if recursos_db else 1
 
@@ -703,16 +710,15 @@ def get_necesidades():
 
 @app.get("/api/donacionesMonetariasTotal")
 def get_donaciones():
-    donaciones = [
-        {"total": 243500}
-    ]
-    return JSONResponse(content=donaciones, media_type="application/json; charset=utf-8")
+    return JSONResponse(content=donacionestotales, media_type="application/json; charset=utf-8")
 
 
 @app.post("/api/donacionesMonetarias")
 async def guardar_donacionescatastrofe(datos: DatosDonaciones):
     print("Id tareas:", datos.id_tarea)
     print("Dinero donado:", datos.cantidad_donada)
+    
+    donacionesmonetarias.append(datos)
 
     return JSONResponse(content={"mensaje": "Donacion guardada correctamente"}, status_code=200)
 
