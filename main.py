@@ -17,6 +17,7 @@ app.add_middleware(
 
 
 class Usuario(BaseModel):
+    dni: str
     nombre: str
     apellidos: str
     telefono: str
@@ -25,6 +26,7 @@ class Usuario(BaseModel):
     prioridad: str
     categoria: str
     descripcion: str
+    fotoPerfil:str
 
 class Necesidad(BaseModel):
     direccion: str
@@ -41,7 +43,7 @@ class DatosTarea(BaseModel):
     categoria: str
     descripcion: str
     estado: str
-    voluntarios_asignados: List[Usuario]
+    voluntariosAsignados: List[Usuario]
     necesidades: List[Necesidad]
     
 class Recurso(BaseModel):
@@ -111,7 +113,7 @@ recursos_db = [
 
 usuarios = [
         {
-            "foto_perfil": "https://randomuser.me/api/portraits/men/10.jpg",
+            "fotoPerfil": "https://randomuser.me/api/portraits/men/10.jpg",
             "nombre": "Carlos",
             "apellidos": "Martínez López",
             "telefono": "321123321",
@@ -122,7 +124,7 @@ usuarios = [
             "descripcion": "Casa gravemente dañada por inundaciones. Necesita reconstrucción urgente."
         },
         {
-            "foto_perfil": "https://randomuser.me/api/portraits/women/45.jpg",
+            "fotoPerfil": "https://randomuser.me/api/portraits/women/45.jpg",
             "nombre": "Lucía",
             "apellidos": "Gómez Pérez",
             "telefono": "321123321",
@@ -133,7 +135,7 @@ usuarios = [
             "descripcion": "Zona afectada por barro y escombros. Se requiere equipo de limpieza."
         },
         {
-            "foto_perfil": "https://randomuser.me/api/portraits/men/32.jpg",
+            "fotoPerfil": "https://randomuser.me/api/portraits/men/32.jpg",
             "nombre": "Andrés",
             "apellidos": "Ruiz Sánchez",
             "telefono": "321123321",
@@ -159,7 +161,7 @@ ayudantes = [
     "tipo_tarea": "ATENCION_SANITARIA",
     "zona": "Zona Sur",
     "turno": "MANYANA",
-    "foto_perfil": "https://randomuser.me/api/portraits/women/12.jpg"
+    "fotoPerfil": "https://randomuser.me/api/portraits/women/12.jpg"
   },
   {
     "id": 7,
@@ -174,7 +176,7 @@ ayudantes = [
     "tipo_tarea": "RECONSTRUCCION",
     "zona": "Zona Este",
     "turno": "TARDE",
-    "foto_perfil": "https://randomuser.me/api/portraits/men/33.jpg"
+    "fotoPerfil": "https://randomuser.me/api/portraits/men/33.jpg"
   },
   {
     "id": 8,
@@ -189,7 +191,7 @@ ayudantes = [
     "tipo_tarea": "PSICOLOGOS",
     "zona": "Centro",
     "turno": "INDIFERENTE",
-    "foto_perfil": "https://randomuser.me/api/portraits/women/25.jpg"
+    "fotoPerfil": "https://randomuser.me/api/portraits/women/25.jpg"
   },
   {
     "id": 9,
@@ -204,7 +206,7 @@ ayudantes = [
     "tipo_tarea": "DISTRIBUCION_DE_ALIMENTOS",
     "zona": "Zona Oeste",
     "turno": "NO_DISPONIBLE",
-    "foto_perfil": "https://randomuser.me/api/portraits/men/40.jpg"
+    "fotoPerfil": "https://randomuser.me/api/portraits/men/40.jpg"
   },
   {
     "id": 10,
@@ -219,239 +221,206 @@ ayudantes = [
     "tipo_tarea": "EQUIPO_DE_RESCATE",
     "zona": "Zona Norte",
     "turno": "TARDE",
-    "foto_perfil": "https://randomuser.me/api/portraits/women/44.jpg"
+    "fotoPerfil": "https://randomuser.me/api/portraits/women/44.jpg"
   }
 
 
     ]
 
 Tareas = [
-        {
-            "id": 1,
-            "nombre": "Distribuir alimentos",
-            "tipo_tarea": "Logística",
-            "zona": "Zona Sur",
-            "turno": "Mañana",
-            "prioridad": "Alta",
-            "categoria": "Comida",
-            "descripcion": "Repartir alimentos a los afectados en la zona sur.",
-            "estado": "Pendiente",
-            "usuarios_voluntarios": [
-                {
-                    "nombre": "Paquito",
-                    "apellidos": "Chocolatero",
-                    "telefono": "123456789",
-                    "correo": "Paquito@gmail.com",
-                    "direccion": "CalledePaco 62 8 4",
-                    "prioridad": "Alta",
-                    "categoria": "Comida",
-                    "descripcion": "Repartir alimentos a los afectados en la zona sur.",
-                    "tipo_tarea": "Distribución",
-                    "zona": "Zona Sur",
-                    "turno": "Mañana",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Paquito"
-                },
-                {
-                    "nombre": "Pepito",
-                    "apellidos": "Casta",
-                    "telefono": "234567890",
-                    "correo": "Pepito@gmail.com",
-                    "direccion": "CalledePaco 61 8 4",
-                    "prioridad": "Alta",
-                    "categoria": "Comida",
-                    "descripcion": "Repartir alimentos a los afectados en la zona sur.",
-                    "tipo_tarea": "Distribución",
-                    "zona": "Zona Sur",
-                    "turno": "Mañana",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Pepito"
-                }
-            ],
-            "usuarios_asignados": [
-                {
-                    "nombre": "Laura",
-                    "apellidos": "Montenegro",
-                    "telefono": "654987321",
-                    "correo": "laura.monte@gmail.com",
-                    "direccion": "Avenida del Sol 45, 3B",
-                    "prioridad": "Media",
-                    "categoria": "Inundación",
-                    "descripcion": "Ayuda en la evacuación de familias afectadas.",
-                    "tipo_tarea": "Evacuación",
-                    "zona": "Zona Sur",
-                    "turno": "Tarde",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Laura"
-                },
-                {
-                    "nombre": "Carlos",
-                    "apellidos": "Del Río",
-                    "telefono": "789456123",
-                    "correo": "carlos.delrio@example.com",
-                    "direccion": "Calle Lluvia 12, Bajo A",
-                    "prioridad": "Baja",
-                    "categoria": "Terremoto",
-                    "descripcion": "Inspección de viviendas en riesgo estructural.",
-                    "tipo_tarea": "Evaluación",
-                    "zona": "Zona Centro",
-                    "turno": "Noche",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
-                }
-            ],
-            "necesidades": [
-                {
-                    "direccion": "Avenida de la Libertad 34, Madrid",
-                    "estado": "PENDIENTE",
-                    "fecha": "2025-04-10",
-                    "urgencia": "Media",
-                    "descripcion": "Reparación de tendido eléctrico en zona rural.",
-                    "tipo": "Incendio"
-                },
-                {
-                    "direccion": "Calle del Mar 14, Valencia",
-                    "estado": "CONFIRMADA",
-                    "fecha": "2025-04-04",
-                    "urgencia": "Baja",
-                    "descripcion": "Inspección de viviendas afectadas por inundaciones.",
-                    "tipo": "Comida"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "nombre": "Atención médica",
-            "tipo_tarea": "Emergencia Sanitaria",
-            "zona": "Zona Este",
-            "turno": "Tarde",
-            "prioridad": "Media",
-            "categoria": "Sanidad",
-            "descripcion": "Brindar primeros auxilios a los heridos.",
-            "estado": "En proceso",
-            "usuarios_voluntarios": [
-                {
-                    "nombre": "Susana",
-                    "apellidos": "Valverde",
-                    "telefono": "612345678",
-                    "correo": "susana.valverde@mail.com",
-                    "direccion": "Paseo de la Esperanza 21, 2ºD",
-                    "prioridad": "Alta",
-                    "categoria": "Rescate",
-                    "descripcion": "Coordinación de equipos de búsqueda y rescate.",
-                    "tipo_tarea": "Rescate",
-                    "zona": "Zona Este",
-                    "turno": "Tarde",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Susana"
-                }
-            ],
-            "usuarios_asignados": [
-                {
-                    "nombre": "Andrés",
-                    "apellidos": "Giménez",
-                    "telefono": "698745632",
-                    "correo": "andresgimenez@yahoo.es",
-                    "direccion": "Calle Roble 9, 1ºA",
-                    "prioridad": "Media",
-                    "categoria": "Logística",
-                    "descripcion": "Gestión de suministros y transporte de materiales.",
-                    "tipo_tarea": "Logística",
-                    "zona": "Zona Centro",
-                    "turno": "Mañana",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Andres"
-                }
-            ],
-            "necesidades": [
-                {
-                    "direccion": "Avenida de la Constitución 25, Cádiz",
-                    "estado": "EN_ESTUDIO",
-                    "fecha": "2025-04-09",
-                    "urgencia": "Media",
-                    "descripcion": "Evaluación de daños en infraestructuras viales.",
-                    "tipo": "Comida"
-                },
-                {
-                    "direccion": "Plaza del Sol 18, Córdoba",
-                    "estado": "CONFIRMADA",
-                    "fecha": "2025-04-06",
-                    "urgencia": "Alta",
-                    "descripcion": "Distribución de alimentos y agua a los afectados.",
-                    "tipo": "Comida"
-                },
-                {
-                    "direccion": "Carrer de Balmes 45, Barcelona",
-                    "estado": "EN_ESTUDIO",
-                    "fecha": "2025-04-08",
-                    "urgencia": "Alta",
-                    "descripcion": "Atención a personas con discapacidad en albergues temporales.",
-                    "tipo": "Comida"
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "nombre": "Reconstrucción de viviendas",
-            "tipo_tarea": "Reconstrucción",
-            "zona": "Zona Norte",
-            "turno": "Completo",
-            "prioridad": "Alta",
-            "categoria": "Reconstrucción",
-            "descripcion": "Apoyo en la reconstrucción de viviendas dañadas.",
-            "estado": "Completada",
-            "usuarios_voluntarios": [
-                {
-                    "nombre": "Carlos",
-                    "apellidos": "Giménez",
-                    "telefono": "698745632",
-                    "correo": "Carlosgimenez@yahoo.es",
-                    "direccion": "Calle Roble 10, 1ºA",
-                    "prioridad": "Media",
-                    "categoria": "Logística",
-                    "descripcion": "Gestión de suministros y transporte de materiales.",
-                    "tipo_tarea": "Reconstrucción",
-                    "zona": "Zona Norte",
-                    "turno": "Completo",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
-                }
-            ],
-            "usuarios_asignados": [ {
-                    "nombre": "Pepe",
-                    "apellidos": "Gomez",
-                    "telefono": "698007452",
-                    "correo": "Carlosgsaimenez@yahoo.es",
-                    "direccion": "Calle Rsaoble 10, 1ºA",
-                    "prioridad": "Media",
-                    "categoria": "Logística",
-                    "descripcion": "Gestión de suministros y transporte de materiales.",
-                    "tipo_tarea": "Reconstrucción",
-                    "zona": "Zona Norte",
-                    "turno": "Completo",
-                    "foto_perfil": "https://i.pravatar.cc/150?u=Carlos"
-                }],
-            "necesidades": [
-                {
-                    "direccion": "Avenida de la Constitución 25, Cádiz",
-                    "estado": "EN_ESTUDIO",
-                    "fecha": "2025-04-09",
-                    "urgencia": "Media",
-                    "descripcion": "Evaluación de daños en infraestructuras viales.",
-                    "tipo": "Comida"
-                },
-                {
-                    "direccion": "Plaza del Sol 18, Córdoba",
-                    "estado": "CONFIRMADA",
-                    "fecha": "2025-04-06",
-                    "urgencia": "Alta",
-                    "descripcion": "Distribución de alimentos y agua a los afectados.",
-                    "tipo": "Comida"
-                },
-                {
-                    "direccion": "Carrer de Balmes 45, Barcelona",
-                    "estado": "EN_ESTUDIO",
-                    "fecha": "2025-04-08",
-                    "urgencia": "Alta",
-                    "descripcion": "Atención a personas con discapacidad en albergues temporales.",
-                    "tipo": "Comida"
-                }
-            ]
-        }
-    ]
+    {
+        "id": 1,
+        "nombre": "Distribuir alimentos",
+        "tipo_tarea": "Logística",
+        "zona": "Zona Sur",
+        "turno": "Mañana",
+        "prioridad": "Alta",
+        "categoria": "Comida",
+        "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+        "estado": "Pendiente",
+        "voluntariosAsignados": [
+            {
+                "dni": "12345678A",
+                "nombre": "Laura",
+                "apellidos": "Montenegro",
+                "telefono": "654987321",
+                "correo": "laura.monte@gmail.com",
+                "direccion": "Avenida del Sol 45, 3B",
+                "prioridad": "Media",
+                "categoria": "Inundación",
+                "descripcion": "Ayuda en la evacuación de familias afectadas.",
+                "fotoPerfil": "https://i.pravatar.cc/150?u=Laura"
+            },
+            {
+                "dni": "87654321B",
+                "nombre": "Carlos",
+                "apellidos": "Del Río",
+                "telefono": "789456123",
+                "correo": "carlos.delrio@example.com",
+                "direccion": "Calle Lluvia 12, Bajo A",
+                "prioridad": "Baja",
+                "categoria": "Terremoto",
+                "descripcion": "Inspección de viviendas en riesgo estructural.",
+                "fotoPerfil": "https://i.pravatar.cc/150?u=Carlos"
+            },
+            {
+                "dni": "11223344C",
+                "nombre": "Paquito",
+                "apellidos": "Chocolatero",
+                "telefono": "123456789",
+                "correo": "Paquito@gmail.com",
+                "direccion": "CalledePaco 62 8 4",
+                "prioridad": "Alta",
+                "categoria": "Comida",
+                "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+                "fotoPerfil": "https://i.pravatar.cc/150?u=Paquito"
+            },
+            {
+                "dni": "22334455D",
+                "nombre": "Pepito",
+                "apellidos": "Casta",
+                "telefono": "234567890",
+                "correo": "Pepito@gmail.com",
+                "direccion": "CalledePaco 61 8 4",
+                "prioridad": "Alta",
+                "categoria": "Comida",
+                "descripcion": "Repartir alimentos a los afectados en la zona sur.",
+                "fotoPerfil": "https://i.pravatar.cc/150?u=Pepito"
+            }
+        ],
+        "necesidades": [
+            {
+                "direccion": "Avenida de la Libertad 34, Madrid",
+                "estado": "PENDIENTE",
+                "fecha": "2025-04-10",
+                "urgencia": "Media",
+                "descripcion": "Reparación de tendido eléctrico en zona rural.",
+                "tipo": "Incendio"
+            },
+            {
+                "direccion": "Calle del Mar 14, Valencia",
+                "estado": "CONFIRMADA",
+                "fecha": "2025-04-04",
+                "urgencia": "Baja",
+                "descripcion": "Inspección de viviendas afectadas por inundaciones.",
+                "tipo": "Comida"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "nombre": "Atención médica",
+        "tipo_tarea": "Emergencia Sanitaria",
+        "zona": "Zona Este",
+        "turno": "Tarde",
+        "prioridad": "Media",
+        "categoria": "Sanidad",
+        "descripcion": "Brindar primeros auxilios a los heridos.",
+        "estado": "En proceso",
+        "voluntariosAsignados": [
+            {
+                "dni": "33445566E",
+                "nombre": "Andrés",
+                "apellidos": "Giménez",
+                "telefono": "698745632",
+                "correo": "andresgimenez@yahoo.es",
+                "direccion": "Calle Roble 9, 1ºA",
+                "prioridad": "Media",
+                "categoria": "Logística",
+                "descripcion": "Gestión de suministros y transporte de materiales.",
+                "fotoPerfil": "https://i.pravatar.cc/150?u=Andres"
+            }
+        ],
+        "necesidades": [
+            {
+                "direccion": "Avenida de la Constitución 25, Cádiz",
+                "estado": "EN_ESTUDIO",
+                "fecha": "2025-04-09",
+                "urgencia": "Media",
+                "descripcion": "Evaluación de daños en infraestructuras viales.",
+                "tipo": "Comida"
+            },
+            {
+                "direccion": "Plaza del Sol 18, Córdoba",
+                "estado": "CONFIRMADA",
+                "fecha": "2025-04-06",
+                "urgencia": "Alta",
+                "descripcion": "Distribución de alimentos y agua a los afectados.",
+                "tipo": "Comida"
+            },
+            {
+                "direccion": "Carrer de Balmes 45, Barcelona",
+                "estado": "EN_ESTUDIO",
+                "fecha": "2025-04-08",
+                "urgencia": "Alta",
+                "descripcion": "Atención a personas con discapacidad en albergues temporales.",
+                "tipo": "Comida"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "nombre": "Reconstrucción de viviendas",
+        "tipo_tarea": "Reconstrucción",
+        "zona": "Zona Norte",
+        "turno": "Completo",
+        "prioridad": "Alta",
+        "categoria": "Reconstrucción",
+        "descripcion": "Apoyo en la reconstrucción de viviendas dañadas.",
+        "voluntariosAsignados": [
+            {
+                "dni": "44556677F",
+                "nombre": "Pepe",
+                "apellidos": "Gomez",
+                "telefono": "698007452",
+                "correo": "Carlosgsaimenez@yahoo.es",
+                "direccion": "Calle Rsaoble 10, 1ºA",
+                "prioridad": "Media",
+                "categoria": "Logística",
+                "descripcion": "Gestión de suministros y transporte de materiales.",
+                "fotoPerfil": "https://i.pravatar.cc/150?u=Carlos"
+            },
+            {
+                "dni": "55667788G",
+                "nombre": "Carlos",
+                "apellidos": "Giménez",
+                "telefono": "698745632",
+                "correo": "Carlosgimenez@yahoo.es",
+                "direccion": "Calle Roble 10, 1ºA",
+                "prioridad": "Media",
+                "categoria": "Logística",
+                "descripcion": "Gestión de suministros y transporte de materiales.",
+                "fotoPerfil": "https://i.pravatar.cc/150?u=Carlos"
+            }
+        ],
+        "necesidades": [
+            {
+                "direccion": "Avenida de la Constitución 25, Cádiz",
+                "estado": "EN_ESTUDIO",
+                "fecha": "2025-04-09",
+                "urgencia": "Media",
+                "descripcion": "Evaluación de daños en infraestructuras viales.",
+                "tipo": "Comida"
+            },
+            {
+                "direccion": "Plaza del Sol 18, Córdoba",
+                "estado": "CONFIRMADA",
+                "fecha": "2025-04-06",
+                "urgencia": "Alta",
+                "descripcion": "Distribución de alimentos y agua a los afectados.",
+                "tipo": "Comida"
+            },
+            {
+                "direccion": "Carrer de Balmes 45, Barcelona",
+                "estado": "EN_ESTUDIO",
+                "fecha": "2025-04-08",
+                "urgencia": "Alta",
+                "descripcion": "Atención a personas con discapacidad en albergues temporales.",
+                "tipo": "Comida"
+            }
+        ]
+    }
+]
 
 Catastrofes = [
         {
@@ -637,7 +606,7 @@ async def crear_tarea(datos: DatosTarea):
     print("Prioridad:", datos.prioridad)
     print("Categoría:", datos.categoria)
     print("Estado:", datos.estado)
-    print("Voluntarios asignados:", datos.voluntarios_asignados)
+    print("Voluntarios asignados:", datos.voluntariosAsignados)
     print("Necesidades:", datos.necesidades)
 
     ids_existentes = [t["id"] for t in Tareas]
@@ -650,7 +619,7 @@ async def crear_tarea(datos: DatosTarea):
         "prioridad": datos.prioridad,
         "categoria": datos.categoria,
         "estado": datos.estado,
-        "voluntarios_asignados": [v.dict() for v in datos.voluntarios_asignados],
+        "voluntariosAsignados": [v.dict() for v in datos.voluntariosAsignados],
         "necesidades": [n.dict() for n in datos.necesidades]
     }
 
@@ -665,7 +634,7 @@ async def modificar_tarea(id: int, datos: DatosTarea):
     print("Prioridad:", datos.prioridad)
     print("Categoría:", datos.categoria)
     print("Estado:", datos.estado)
-    print("Voluntarios asignados:", datos.voluntarios_asignados)
+    print("Voluntarios asignados:", datos.voluntariosAsignados)
     print("Necesidades:", datos.necesidades)
 
     index = next((i for i, c in enumerate(Tareas) if c["id"] == id), None)
@@ -680,7 +649,7 @@ async def modificar_tarea(id: int, datos: DatosTarea):
         "prioridad": datos.prioridad,
         "categoria": datos.categoria,
         "estado": datos.estado,
-        "voluntarios_asignados": [v.dict() for v in datos.voluntarios_asignados],
+        "voluntariosAsignados": [v.dict() for v in datos.voluntariosAsignados],
         "necesidades": [n.dict() for n in datos.necesidades]
     }
 
