@@ -774,3 +774,35 @@ def panel_donaciones():
     }
 
     return JSONResponse(content=response_data, media_type="application/json; charset=utf-8")
+
+@app.get("/api/donacionesrealizadas")
+def obtener_donaciones():
+    donaciones = [
+        {
+            "id": 1,
+            "fecha": "2025-05-30",
+            "donacion": "100€"
+        },
+        {
+            "id": 2,
+            "fecha": "2025-05-29",
+            "donacion": "pala"
+        },
+        {
+            "id": 3,
+            "fecha": "2025-05-28",
+            "donacion": "caja de comida"
+        },
+        {
+            "id": 4,
+            "fecha": "2025-05-27",
+            "donacion": "ropa de abrigo"
+        },
+        {
+            "id": 5,
+            "fecha": "2025-05-26",
+            "donacion": "botiquín de primeros auxilios"
+        }
+    ]
+
+    return JSONResponse(content=donaciones, media_type="application/json; charset=utf-8")
