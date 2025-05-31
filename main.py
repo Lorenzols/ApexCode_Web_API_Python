@@ -1,10 +1,12 @@
-import json
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from typing import List
 from fastapi import HTTPException
+from fastapi.responses import FileResponse
+import json
+import tempfile
 
 app = FastAPI()
 
@@ -497,11 +499,7 @@ ayudantes = [
 
     ]
 
-donacionesmonetarias = [
-    {"id_tarea":1,"cantidad_donada":15.0},
-    {"id_tarea":2,"cantidad_donada":20.0},
-    {"id_tarea":3,"cantidad_donada":150.0}
-]
+donacionesmonetarias = []
 
 donacionestotales = [
         {"total": 243500}
@@ -723,14 +721,6 @@ async def guardar_donacionescatastrofe(datos: DatosDonaciones):
     print("Id tareas:", datos.id_tarea)
     print("Dinero donado:", datos.cantidad_donada)
     
-    for index, donacion in enumerate(donacionesmonetarias):
-        if tareas["id"] == datos.id_tarea:
-            print(tareas["id"])
-            
-            return JSONResponse(
-                content={"mensaje": f"Catástrofe con ID {idTarea} eliminada correctamente"},
-                status_code=200
-            )
     donacionesmonetarias.append(datos)
 
     return JSONResponse(content={"mensaje": "Donacion guardada correctamente"}, status_code=200)
@@ -739,7 +729,6 @@ async def guardar_donacionescatastrofe(datos: DatosDonaciones):
 
 @app.get("/api/panelDonaciones")
 def panel_donaciones():
-    
     response_data = {
         "totalRecaudado": "243.500€",
         "donacionesFisicas": 125,
@@ -789,32 +778,55 @@ def panel_donaciones():
 
     return JSONResponse(content=response_data, media_type="application/json; charset=utf-8")
 
-
-
-@app.get("/api/json/{nombre_archivo}")
-def leer_json(nombre_archivo: str):
-    filename = f"{nombre_archivo}.json"
-    try:
-        with open(filename, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return JSONResponse(content=data)
-    except FileNotFoundError:
-        return JSONResponse(content={"error": "Archivo no encontrado"}, status_code=404)
-    
-
-@app.get("/api/catastrofes-json")
-def leer_archivo_json():
-    with open("catastrofes.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return JSONResponse(content=data)
-
-
-@app.get("/api/donacionesLista")
-def donaciones_lista():
-    datos = [
-        { "id": 1, "importe": 230.00 },
-        { "id": 2, "importe": 5000.00 },
-        { "id": 3, "importe": 120.00 },
-        { "id": 4, "importe": 8300.00 }
+@app.get("/api/donacionesrealizadas")
+def obtener_donaciones():
+    donaciones = [
+        {
+            "id": 1,
+            "fecha": "2025-05-30",
+            "donacion": "100€"
+        },
+        {
+            "id": 2,
+            "fecha": "2025-05-29",
+            "donacion": "pala"
+        },
+        {
+            "id": 3,
+            "fecha": "2025-05-28",
+            "donacion": "caja de comida"
+        },
+        {
+            "id": 4,
+            "fecha": "2025-05-27",
+            "donacion": "ropa de abrigo"
+        },
+        {
+            "id": 5,
+            "fecha": "2025-05-26",
+            "donacion": "botiquín de primeros auxilios"
+        }
     ]
-    return JSONResponse(content=datos)
+
+    return JSONResponse(content=donaciones, media_type="application/json; charset=utf-8")
+
+@app.get("/api/donaciones/descargar/json")
+def descargar_json():
+    datos = [
+        {"id": 1, "importe": 230.00},
+        {"id": 2, "importe": 5000.00},
+        {"id": 3, "importe": 120.00},
+        {"id": 4, "importe": 8300.00}
+    ]
+
+    # Crear archivo temporal
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".json", mode="w", encoding="utf-8") as tmp:
+        json.dump(datos, tmp, indent=2)
+        tmp_path = tmp.name
+
+    # Devolver como archivo descargable
+    return FileResponse(
+        path=tmp_path,
+        media_type="application/json",
+        filename="donaciones.json"
+    )
