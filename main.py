@@ -708,12 +708,12 @@ def get_necesidades():
     
     return JSONResponse(content=necesidades, media_type="application/json; charset=utf-8")
 
-@app.get("/api/donacionesMonetariasTotal")
+@app.get("/api/donaciones/monetarias")
 def get_donaciones():
     return JSONResponse(content=donacionestotales, media_type="application/json; charset=utf-8")
 
 
-@app.post("/api/donacionesMonetarias")
+@app.post("/api/donaciones/monetarias")
 async def guardar_donacionescatastrofe(datos: DatosDonaciones):
     print("Id tareas:", datos.id_tarea)
     print("Dinero donado:", datos.cantidad_donada)
